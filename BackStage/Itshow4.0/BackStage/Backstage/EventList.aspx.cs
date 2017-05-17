@@ -87,6 +87,7 @@ public partial class EventList : System.Web.UI.Page
     {
 
         if (Convert.ToInt32(lbNow.Text) + 1 <= Convert.ToInt32(lbTotal.Text))
+
             lbNow.Text = Convert.ToString(Convert.ToInt32(lbNow.Text) + 1);
 
         DataBindToRepeater(Convert.ToInt32(lbNow.Text), (List<Event>)Session["ds"]);

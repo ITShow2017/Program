@@ -53,7 +53,7 @@
 					<li class="dropDown dropDown_hover">
 						<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+							<li><a href="javascript:;" onclick="member_add('个人信息','Personal.aspx?username=<%=Session["username"] %>','800','500')">个人信息</a></li>
 							<li><a href="Login.aspx">切换账户</a></li>
 							<li><asp:LinkButton ID="lkbtnExit" runat="server" Text="退出" OnClick="lkbtnExit_Click"></asp:LinkButton></li>
 					</ul>
@@ -164,21 +164,10 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
-$(function(){
-	/*$("#min_title_list li").contextMenu('Huiadminmenu', {
-		bindings: {
-			'closethis': function(t) {
-				console.log(t);
-				if(t.find("i")){
-					t.find("i").trigger("click");
-				}		
-			},
-			'closeall': function(t) {
-				alert('Trigger was '+t.id+'\nAction was Email');
-			},
-		}
-	});*/
-});
+    function admin_edit(title,url,w,h){
+        layer_show(title,url,w,h);
+    
+};
 /*个人信息*/
 function myselfinfo(){
 	layer.open({

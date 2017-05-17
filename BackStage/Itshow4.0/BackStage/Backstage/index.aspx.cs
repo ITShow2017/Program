@@ -25,7 +25,6 @@ public partial class BackStage_index : System.Web.UI.Page
             }
         }
     }
-
     protected void lkbtnExit_Click(object sender, EventArgs e)
     {
         Session["username"] = null;

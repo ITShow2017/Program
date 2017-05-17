@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ChangeReply.aspx.cs" Inherits="BackStage_Backstage_ChangeReply" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ChangeReply.aspx.cs" Inherits="BackStage_Backstage_ChangeReply" validateRequest="false" %>
 
 <!DOCTYPE html>
 

@@ -10,7 +10,6 @@ public partial class BackStage_Backstage_Admin_role : System.Web.UI.Page
     static protected int AdminCount;
     protected void Page_Load(object sender, EventArgs e)
     {
-      
         if (Session["username"] == null)
         {
             Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");

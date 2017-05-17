@@ -59,9 +59,9 @@
 						  <%#Eval("MessageTime") %> </div>
 					</td>
 					<td><%#Eval("MessageAdminId") %></td>
-					<td><a href="javascript:;" onclick="member_show('张三','member-show.html','10001','360','400')"><%#Eval("MessageComment") %></a></td>
+					<td><a href="javascript:;" onclick="member_show('回复','ChangeReply.aspx?id=<%#Eval("MessageId") %>','1100','','500')"><%#Eval("MessageComment") %></a></td>
 					<td class="td-manage">
-                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','ChangeReply.aspx','<%#Eval("MessageId") %>','4','','510')" style="text-decoration:none">
+                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','ChangeReply.aspx?id=<%#Eval("MessageId") %>','<%#Eval("MessageId") %>','1100','','510')" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6df;</i></a>
                          <asp:LinkButton ID="lkDelete" runat="server" CssClass="ml-5"  OnClientClick="return confirm('如果删除')" CommandArgument='<%#Eval("MessageId") %>' CommandName="Delete">
                              <i class="Hui-iconfont">&#xe6e2;</i></asp:LinkButton></td>

@@ -48,65 +48,72 @@ public partial class BackStage_Backstage_Admin_role_add : System.Web.UI.Page
             }
             else
             {
-                if (question1 == question2 || question2 == question3 || question3 == question1)
+                if (txtPwd.Text.Length >= 8)
                 {
-                    Response.Write("<script>alert('问题不能选择一样！')</script>");
+                    if (question1 == question2 || question2 == question3 || question3 == question1)
+                    {
+                        Response.Write("<script>alert('问题不能选择一样！')</script>");
+                    }
+                    else
+                    {
+
+                        using (var db = new ITShowEntities())
+                        {
+                            Admin admin = new Admin();
+
+                            Admin ad = db.Admin.SingleOrDefault(a => a.AdminName == txtusername.Text);
+
+                            if (ad == null)
+                            {
+                                admin.AdminName = txtusername.Text;
+
+                                admin.AdminPassword = Class1.md5(txtPwd.Text, 32);
+
+                                admin.AdminEmail = txtmailbox.Text;
+
+                                admin.AdminImage = "Images / t011ea4d03abdd5760e.jpg";
+
+                                db.Admin.Add(admin);
+
+                                db.SaveChanges();
+
+                                Admin ad1 = db.Admin.SingleOrDefault(a => a.AdminName == txtusername.Text);
+
+                                int id = ad1.AdminId;
+
+                                Question thisquestion1 = new Question();
+                                Question thisquestion2 = new Question();
+                                Question thisquestion3 = new Question();
+
+                                thisquestion1.AdminId = id;
+                                thisquestion2.AdminId = id;
+                                thisquestion3.AdminId = id;
+
+                                thisquestion1.Question1 = question1;
+                                thisquestion2.Question1 = question2;
+                                thisquestion3.Question1 = question3;
+
+                                thisquestion1.Answer = answer1;
+                                db.Question.Add(thisquestion1);
+                                thisquestion2.Answer = answer2;
+                                db.Question.Add(thisquestion2);
+                                thisquestion3.Answer = answer3;
+                                db.Question.Add(thisquestion3);
+
+                                db.SaveChanges();
+                                Response.Write("<script>alert('注册成功！')</script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('用户名已经存在！')</script>");
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
-
-                    using (var db = new ITShowEntities())
-                    {
-                        Admin admin = new Admin();
-
-                        Admin ad = db.Admin.SingleOrDefault(a => a.AdminName == txtusername.Text);
-
-                        if (ad == null)
-                        {
-                            admin.AdminName = txtusername.Text;
-
-                            admin.AdminPassword = Class1.md5(txtPwd.Text, 32);
-
-                            admin.AdminEmail = txtmailbox.Text;
-
-                            admin.AdminImage = "Images / t011ea4d03abdd5760e.jpg";
-
-                            db.Admin.Add(admin);
-
-                            db.SaveChanges();
-
-                            Admin ad1 = db.Admin.SingleOrDefault(a => a.AdminName == txtusername.Text);
-
-                            int id = ad1.AdminId;
-
-                            Question thisquestion1 = new Question();
-                            Question thisquestion2 = new Question();
-                            Question thisquestion3 = new Question();
-
-                            thisquestion1.AdminId = id;
-                            thisquestion2.AdminId = id;
-                            thisquestion3.AdminId = id;
-
-                            thisquestion1.Question1 = question1;
-                            thisquestion2.Question1 = question2;
-                            thisquestion3.Question1 = question3;
-
-                            thisquestion1.Answer = answer1;
-                            db.Question.Add(thisquestion1);
-                            thisquestion2.Answer = answer2;
-                            db.Question.Add(thisquestion2);
-                            thisquestion3.Answer = answer3;
-                            db.Question.Add(thisquestion3);
-
-                            db.SaveChanges();
-                            Response.Write("<script>alert('注册成功！')</script>");
-                        }
-                        else
-                        {
-                            Response.Write("<script>alert('用户名已经存在！')</script>");
-                        }
-
-                    }
+                    Response.Write("<script>alert('密码长度不够！')</script>");
                 }
             }
         }

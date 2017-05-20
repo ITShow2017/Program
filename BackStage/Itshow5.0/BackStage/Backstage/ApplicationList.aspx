@@ -40,7 +40,10 @@
 
             <div class="cl pd-5 bg-1 bk-gray mt-20">
                 <span class="l">
-                    <asp:Button CssClass="btn btn-danger radius" runat="server" ID="Button1" Text="批量删除" OnClick="btnDelete_Click" />
+<%--                    <asp:Button CssClass="btn btn-danger radius" runat="server" ID="Button1" Text="批量删除" />--%>
+                    <div class="666 btn btn-danger radius"  >
+                        批量删除
+                    </div>
                     <i class="Hui-iconfont">&#xe6e2;</i></span> <span class="r">报名总数量:<strong>
                         <asp:Label ID="lbcount" runat="server"></asp:Label></strong> 人</span>
             </div>
@@ -57,11 +60,11 @@
             <asp:Label ID="lbdptCount" runat="server"></asp:Label>
             <br />
 
-            <%--日期控件--%>
+<%--            
             <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
             &nbsp;&nbsp;&nbsp;
         <input runat="server" visible="false" id="txtTime1" type="text" class="text" onclick="WdatePicker({ skin: 'whyGreen', dateFmt: 'yyyy-MM-dd' })" />
-            <asp:Button runat="server" Visible="false" ID="lbDelete" Text="删除该日期之前的记录" OnClick="lbDelete_Click"></asp:Button>
+            <asp:Button runat="server" Visible="false" ID="lbDelete" Text="删除该日期之前的记录" OnClick="lbDelete_Click"></asp:Button>--%>
             <div class="mt-20">
                 <table class="table table-border table-bordered table-hover table-bg table-sort">
                     <thead>
@@ -70,7 +73,8 @@
                                 <input type="checkbox" name="" value=""></th>
                             <th>姓名</th>
                             <th>性别</th>
-                            <th>专业年级</th>
+                            <th>年级</th>
+                            <th>专业</th>
                             <th>意向部门</th>
                             <th>电话</th>
                             <th>QQ</th>
@@ -84,10 +88,11 @@
                             <ItemTemplate>
                                 <tr class="text-c">
                                     <td>
-                                        <input type="checkbox" value="1" name=""></td>
+                                        <input type="checkbox" id='<%# Eval("ApplicationId") %>' value="1" name=""></td>
                                     <td><%# Eval("Name") %></td>
                                     <td><%# Eval("Sex") %></td>
-                                    <td><%# Eval("MajorGrade") %></td>
+                                    <td><%# Eval("Grade") %></td>
+                                    <td><%# Eval("Major") %></td>
                                     <td><%# Eval("Department") %></td>
                                     <td><%# Eval("Telephone") %></td>
                                     <td><%# Eval("QQ") %></td>
@@ -133,22 +138,50 @@
         <!--/_footer 作为公共模版分离出去-->
 
         <!--请在下方写此页面业务相关的脚本-->
-        <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
-<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
-<script type="text/javascript">
+        <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+        <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+        <script type="text/javascript">
+            $(".666").on("click", function () {
+                member_del();
+            })
+            /*用户-删除*/
+            function member_del() {
 
-            //$(function(){
-            //	$('.table-sort').dataTable({
-            //		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-            //		"bStateSave": true,//状态保存
-            //		"aoColumnDefs": [
-            //		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            //		  {"orderable":false,"aTargets":[0,8,9]}// 制定列不参与排序
-            //		]
-            //	});
+                layer.confirm('确认要删除吗？', function () {
 
-            //});
+                    var infonumber = $("tbody").find("tr").length;
+
+                    var jsonstr = "[]";
+
+                    var idList = eval('(' + jsonstr + ')');
+
+                    for (var i = 0; i < infonumber; i++) {
+                        var jsonTemp
+                        if ($("tbody tr:eq(" + i + ") input").is(":checked")) {
+                            jsonTemp = { "id": $("tbody tr:eq(" + i + ") input").attr("id") };
+                            idList.push(jsonTemp);
+                        }
+                    }
+                    $.ajax({
+                        type: 'get',
+                        url: 'Ajax/DeleteHandler.ashx',
+                        async: 'true',
+                        data: {
+                            type:1,
+                            idInfor: JSON.stringify(idList)
+                        },
+                        traditional: true,
+                        success: function (data) {
+                            //$(obj).parents("tr").remove();
+                            layer.msg('已删除!', { icon: 1, time: 1000 });
+                            window.location.href = 'ApplicationList.aspx';
+                        },
+                        error: function (data) {
+                        },
+                    });
+                });
+            }
             /*用户-添加*/
             function member_add(title, url, w, h) {
                 layer_show(title, url, w, h);
@@ -204,23 +237,7 @@
             function change_password(title, url, id, w, h) {
                 layer_show(title, url, w, h);
             }
-            /*用户-删除*/
-            function member_del(obj, id) {
-                layer.confirm('确认要删除吗？', function (index) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '',
-                        dataType: 'json',
-                        success: function (data) {
-                            $(obj).parents("tr").remove();
-                            layer.msg('已删除!', { icon: 1, time: 1000 });
-                        },
-                        error: function (data) {
-                            console.log(data.msg);
-                        },
-                    });
-                });
-            }
+            
         </script>
     </form>
 </body>

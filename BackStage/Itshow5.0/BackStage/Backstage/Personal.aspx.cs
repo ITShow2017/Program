@@ -9,32 +9,40 @@ public partial class BackStage_Backstage_Personal : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["username"] == null)
         {
-            try
+            Response.Write("<script>alert('尚未登陆！');window.location='Login.aspx'</script>");
+        }
+        else
+        {
+            if (!IsPostBack)
             {
-                string username = Request.QueryString["username"];
-
-                using (var db = new ITShowEntities())
+                try
                 {
-                    Admin admin = db.Admin.SingleOrDefault(a => a.AdminName == username);
+                    string username = Request.QueryString["username"];
 
-                    txtemail.Text = admin.AdminEmail;
-
-                    btnImage.ImageUrl = admin.AdminImage.Trim();
-
-                    if (Session["url"] != null)
+                    using (var db = new ITShowEntities())
                     {
-                        btnImage.ImageUrl = Session["url"].ToString();
+                        Admin admin = db.Admin.SingleOrDefault(a => a.AdminName == username);
 
-                        Session["url"] = null;
+                        txtemail.Text = admin.AdminEmail;
+
+                        btnImage.ImageUrl = admin.AdminImage.Trim();
+
+                        if (Request.Cookies["url"] != null)
+                        {
+                            btnImage.ImageUrl = Request.Cookies["url"].Value;
+                            HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                            cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                            Response.Cookies.Add(cookies1);
+                        }
                     }
                 }
-            }
-            catch
-            {
-                Response.Write("<script>alert('地址栏错误');window.parent.location='index.aspx'</script>");
+                catch
+                {
+                    Response.Write("<script>alert('地址栏错误');window.parent.location='index.aspx'</script>");
 
+                }
             }
         }
     }

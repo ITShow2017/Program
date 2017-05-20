@@ -35,7 +35,12 @@
         <asp:TextBox ID="txtKeyComment" runat="server" CssClass="input-text" Width="250px" placeholder="输入关键字"></asp:TextBox>
             <asp:Button ID="btnSelect" runat="server" CssClass="btn btn-success radius" Text="搜意见" OnClick="btnSelect_Click"/><i class="Hui-iconfont">&#xe665;</i>    
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="member_del()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> </span> <span class="r">共有数据：<strong><%=CommentCount %></strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+        <%--<a href="javascript:;" onclick="member_del()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>--%> 
+        <div class="666 btn btn-danger radius"  >
+                        批量删除
+                    </div>
+</span> <span class="r">共有数据：<strong><%=CommentCount %></strong> 条</span> </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
@@ -51,19 +56,19 @@
                 <asp:Repeater ID="rptComment" runat="server" OnItemCommand="rptComment_ItemCommand">
                     <ItemTemplate>
 				<tr class="text-c">
-					<td><input type="checkbox" value="1" name=""></td>
+					<td><input type="checkbox" id=<%# Eval("MessageId") %> value="1" name=""></td>
 					<td class="text-l">
                         <div class="c-999 f-12">
 					<asp:Label ID="lbComment" runat="server" Text='<%#Eval("MessageContent") %>'></asp:Label></div>
                         <div class="c-999 f-12">
 						  <%#Eval("MessageTime") %> </div>
 					</td>
-					<td><%#Eval("AdminName") %></td>
+					<td><%#Eval("MessageAdminName") %></td>
 					<td><a href="javascript:;" onclick="member_show('回复','ChangeReply.aspx?id=<%#Eval("MessageId") %>','1100','','500')"><%#Eval("MessageComment") %></a></td>
 					<td class="td-manage">
-                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','ChangeReply.aspx?id=<%#Eval("MessageId") %>','<%#Eval("MessageId") %>','1100','','510')" style="text-decoration:none">
+                        <a title="编辑" href="javascript:;" onclick="member_edit('编辑','ChangeReply.aspx?id=<%#Eval("MessageId") %>','1100','1050')" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6df;</i></a>
-                         <asp:LinkButton ID="lkDelete" runat="server" CssClass="ml-5"  OnClientClick="return confirm('如果删除')" CommandArgument='<%#Eval("MessageId") %>' CommandName="Delete">
+                         <asp:LinkButton ID="lkDelete" runat="server" CssClass="ml-5"  OnClientClick="return confirm('确定删除？')" CommandArgument='<%#Eval("MessageId") %>' CommandName="Delete">
                              <i class="Hui-iconfont">&#xe6e2;</i></asp:LinkButton></td>
 				</tr>
                         </ItemTemplate>
@@ -98,17 +103,46 @@
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-//$(function(){
-//	$('.table-sort').dataTable({
-//		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-//		"bStateSave": true,//状态保存
-//		"aoColumnDefs": [
-//		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-//		  {"orderable":false,"aTargets":[0,2,4]}// 制定列不参与排序
-//		]
-//	});
+    $(".666").on("click", function () {
+        member_del();
+    })
+    /*用户-删除*/
+    function member_del() {
 
-//});
+        layer.confirm('确认要删除吗？', function () {
+
+            var infonumber = $("tbody").find("tr").length;
+
+            var jsonstr = "[]";
+
+            var idList = eval('(' + jsonstr + ')');
+
+            for (var i = 0; i < infonumber; i++) {
+                var jsonTemp
+                if ($("tbody tr:eq(" + i + ") input").is(":checked")) {
+                    jsonTemp = { "id": $("tbody tr:eq(" + i + ") input").attr("id") };
+                    idList.push(jsonTemp);
+                }
+            }
+            $.ajax({
+                type: 'get',
+                url: 'Ajax/DeleteHandler.ashx',
+                async: 'true',
+                data: {
+                    type: 2,
+                    idInfor: JSON.stringify(idList)
+                },
+                traditional: true,
+                success: function (data) {
+                    //$(obj).parents("tr").remove();
+                    layer.msg('已删除!', { icon: 1, time: 1000 });
+                    window.location.href = 'Comment-list.aspx';
+                },
+                error: function (data) {
+                },
+            });
+        });
+    }
 /*用户-添加*/
 function member_add(title,url,w,h){
     layer_show(title, url, w, h);
@@ -137,31 +171,31 @@ function member_start(obj,id){
 	});
 }
 /*用户-编辑*/
-function member_edit(title,url,id,w,h){
-	layer_show1(title,url,id,w,h);
+function member_edit(title,url,w,h){
+	layer_show1(title,url,w,h);
 }
 /*密码-修改*/
 function change_password(title,url,id,w,h){
 	layer_show(title,url,w,h);	
 }
 /*用户-删除*/
-function member_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
+//function member_del(obj,id){
+//	layer.confirm('确认要删除吗？',function(index){
+//		$.ajax({
+//			type: 'POST',
+//			url: '',
+//			dataType: 'json',
+//			success: function(data){
+//				$(obj).parents("tr").remove();
+//				layer.msg('已删除!',{icon:1,time:1000});
+//			},
+//			error:function(data) {
+//				console.log(data.msg);
+//			},
+//		});		
+//	});
     
-}
+//}
 
 </script>
         </form>

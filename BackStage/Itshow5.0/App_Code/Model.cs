@@ -14,7 +14,6 @@ public partial class Admin
 {
     public Admin()
     {
-        this.Message = new HashSet<Message>();
         this.Question = new HashSet<Question>();
     }
 
@@ -25,7 +24,6 @@ public partial class Admin
     public string AdminEmail { get; set; }
     public bool Flag { get; set; }
 
-    public virtual ICollection<Message> Message { get; set; }
     public virtual ICollection<Question> Question { get; set; }
 }
 
@@ -33,13 +31,14 @@ public partial class Application
 {
     public int ApplicationId { get; set; }
     public string Name { get; set; }
-    public Nullable<bool> Sex { get; set; }
-    public string MajorGrade { get; set; }
+    public bool Sex { get; set; }
+    public string Major { get; set; }
     public string Telephone { get; set; }
     public string Department { get; set; }
     public string QQ { get; set; }
     public string Introdution { get; set; }
-    public Nullable<System.DateTime> Time { get; set; }
+    public System.DateTime Time { get; set; }
+    public string Grade { get; set; }
 }
 
 public partial class Event
@@ -64,20 +63,8 @@ public partial class Message
     public int MessageId { get; set; }
     public string MessageContent { get; set; }
     public string MessageComment { get; set; }
-    public Nullable<int> MessageAdminId { get; set; }
+    public string MessageAdminName { get; set; }
     public System.DateTime MessageTime { get; set; }
-
-    public virtual Admin Admin { get; set; }
-}
-
-public partial class MessageAdmin
-{
-    public int MessageId { get; set; }
-    public string MessageContent { get; set; }
-    public string MessageComment { get; set; }
-    public Nullable<int> MessageAdminId { get; set; }
-    public System.DateTime MessageTime { get; set; }
-    public string AdminName { get; set; }
 }
 
 public partial class Question

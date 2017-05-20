@@ -10,79 +10,86 @@ public partial class BackStage_Backstage_PhotoCut : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["username"] == null)
         {
-            Regex r = new Regex("^[1-9]d*|0$");
-
-            if (Request.QueryString["type"] != null && Request.QueryString["type1"] != null && r.IsMatch(Request.QueryString["type"]) && r.IsMatch(Request.QueryString["type1"]))
+            Response.Write("<script>alert('尚未登陆！');window.location='Login.aspx'</script>");
+        }
+        else
+        {
+            if (!IsPostBack)
             {
-                int type = Convert.ToInt32(Request.QueryString["type"]);//标记是哪个模块的照片（大事件，成员，作品）
+                Regex r = new Regex("^[1-9]d*|0$");
 
-                int type1 = Convert.ToInt32(Request.QueryString["type1"]);//标记是添加还是编辑
-
-                if (type <= 4 && type >= 1 && type1 <= 1 && type1 >= 0)
+                if (Request.QueryString["type"] != null && Request.QueryString["type1"] != null && r.IsMatch(Request.QueryString["type"]) && r.IsMatch(Request.QueryString["type1"]))
                 {
-                    if (type1 == 1)
+                    int type = Convert.ToInt32(Request.QueryString["type"]);//标记是哪个模块的照片（大事件，成员，作品）
+
+                    int type1 = Convert.ToInt32(Request.QueryString["type1"]);//标记是添加还是编辑
+
+                    if (type <= 4 && type >= 1 && type1 <= 1 && type1 >= 0)
                     {
-                        if (Request.QueryString["id"] != null && r.IsMatch(Request.QueryString["id"]))
+                        if (type1 == 1)
                         {
-                            int id = Convert.ToInt32(Request.QueryString["id"]);
-                            using (var db = new ITShowEntities())
+                            if (Request.QueryString["id"] != null && r.IsMatch(Request.QueryString["id"]))
                             {
-                                switch (type)
+                                int id = Convert.ToInt32(Request.QueryString["id"]);
+                                using (var db = new ITShowEntities())
                                 {
-                                    case 1:
-                                        Member person = (from it in db.Member where it.MemberId == id select it).FirstOrDefault();
-                                        if (person == null)
-                                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                                        break;
+                                    switch (type)
+                                    {
+                                        case 1:
+                                            Member person = (from it in db.Member where it.MemberId == id select it).FirstOrDefault();
+                                            if (person == null)
+                                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
+                                            break;
 
-                                    case 2:
-                                        Works person1 = (from it in db.Works where it.WorksId == id select it).FirstOrDefault();
-                                        if (person1 == null)
-                                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                                        break;
+                                        case 2:
+                                            Works person1 = (from it in db.Works where it.WorksId == id select it).FirstOrDefault();
+                                            if (person1 == null)
+                                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
+                                            break;
 
-                                    case 3:
-                                        Event person2 = (from it in db.Event where it.EventId == id select it).FirstOrDefault();
-                                        if (person2 == null)
-                                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                                        break;
-                                    case 4:
-                                        Admin person3 = (from it in db.Admin where it.AdminId == id select it).FirstOrDefault();
-                                        if (person3 == null)
-                                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                                        break;
+                                        case 3:
+                                            Event person2 = (from it in db.Event where it.EventId == id select it).FirstOrDefault();
+                                            if (person2 == null)
+                                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
+                                            break;
+                                        case 4:
+                                            Admin person3 = (from it in db.Admin where it.AdminId == id select it).FirstOrDefault();
+                                            if (person3 == null)
+                                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
+                                            break;
+                                    }
                                 }
                             }
+                            else
+                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
                         }
-                        else
-                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                    }
-                    else if (type == 4)
-                    {
-                        try
+                        else if (type == 4)
                         {
-                            string username = Request.QueryString["username"];
-
-                            using (var db = new ITShowEntities())
+                            try
                             {
-                                Admin person3 = (from it in db.Admin where it.AdminName==username select it).FirstOrDefault();
+                                string username = Request.QueryString["username"];
+
+                                using (var db = new ITShowEntities())
+                                {
+                                    Admin person3 = (from it in db.Admin where it.AdminName == username select it).FirstOrDefault();
+                                }
+                            }
+                            catch
+                            {
+                                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
                             }
                         }
-                        catch
-                        {
-                            Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
-                        }
                     }
+                    else
+                        Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
                 }
                 else
                     Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
+
             }
-            else
-                Response.Write("<script>alert('地址栏有误');location='index.aspx'</script>");
 
         }
-
     }
 }

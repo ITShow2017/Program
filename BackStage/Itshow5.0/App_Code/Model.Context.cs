@@ -31,5 +31,4 @@ public partial class ITShowEntities : DbContext
     public DbSet<Question> Question { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<Works> Works { get; set; }
-    public DbSet<MessageAdmin> MessageAdmin { get; set; }
 }

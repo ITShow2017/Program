@@ -32,12 +32,14 @@ public partial class BackStage_Backstage_ManagerAdmin : System.Web.UI.Page
                         {
                             txtemail.Text = admin.AdminEmail;
 
-                            btnImage.ImageUrl = admin.AdminImage;
+                            btnImage.ImageUrl = admin.AdminImage.Trim();
 
-                            if (Session["url"] != null)
+                            if (Request.Cookies["url"] != null)
                             {
-                                btnImage.ImageUrl = Session["url"].ToString();
-                                Session["url"] = null;
+                                btnImage.ImageUrl = Request.Cookies["url"].Value;
+                                HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                                cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                                Response.Cookies.Add(cookies1);
                             }
                         }
 

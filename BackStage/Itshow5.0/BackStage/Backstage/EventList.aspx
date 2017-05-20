@@ -35,9 +35,10 @@
         <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 大事件管理 <span class="c-gray en">&gt;</span> 大事件列表 <a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
         <div class="page-container">
             <div class="cl pd-5 bg-1 bk-gray mt-20">
-                <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加大事件" data-href="EventAdd.aspx" onclick="member_add('添加大事件','EventAdd.aspx','','510')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加大事件</a></span> <span class="r">大事件数量<strong>
+                <span class="l">
+                    <a class="btn btn-primary radius" data-title="添加大事件" data-href="EventAdd.aspx" onclick="member_add('添加大事件','EventAdd.aspx','','510')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加大事件</a></span> <span class="r">大事件数量<strong>
                     <asp:Label ID="lbcount" runat="server"></asp:Label></strong> 件</span>
-<%--            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <%--            <div class="cl pd-5 bg-1 bk-gray mt-20">
                 <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="member_add('添加大事件','MemberAdd.aspx','','510')" class="btn btn-primary radius"></span> <span class="r">大事件数量<strong>
                     <asp:Label ID="lbcount" runat="server"></asp:Label></strong> 件</span>--%>
             </div>

@@ -43,29 +43,30 @@ public partial class EventEditor : System.Web.UI.Page
 
                                 dimg.Visible = true;
                             }
-                            if (Session["infor"] != null || Session["url"] != null)
+
+                            if (Request.Cookies["arr"] != null)
                             {
-                                if (Session["infor"] != null)
-                                {
-                                    ArrayList arr = new ArrayList();
-                                    arr = (ArrayList)Session["infor"];
-                                    txtContent.Text = arr[0].ToString();
-                                    txtTime.Value = arr[1].ToString();
+                                txtContent.Text = Server.UrlDecode(Request.Cookies["arr"]["content"]);
+                                txtTime.Value = Server.UrlDecode(Request.Cookies["arr"]["time"]);
 
-                                    Session["infor"] = null;
-                                }
+                                HttpCookie cookies = Request.Cookies["arr"];//删除cookies
+                                cookies.Expires = System.DateTime.Now.AddDays(-1);
 
-                                if (Session["url"] != null)
-                                {
-                                    img.Visible = true;
-                                    img.ImageUrl = Session["url"].ToString();
-                                    dimg.Visible = true;
-                                    Session["url"] = null;
-                                }
-                                //else
-                                //    Response.Write("<script>alert('照片上传失败请重试')</script>");
+                                Response.Cookies.Add(cookies);
                             }
-              
+                            if (Request.Cookies["url"] != null)
+                            {
+                                img.Visible = true;
+                                dimg.Visible = true;
+                                img.ImageUrl = Request.Cookies["url"].Value;
+                                HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                                cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                                Response.Cookies.Add(cookies1);
+
+                            }
+
+
+
                         }
 
                     }
@@ -90,7 +91,7 @@ public partial class EventEditor : System.Web.UI.Page
         if (content.Length > 0 && txtTime.Value.Length > 0 )
         {
 
-            using (var db = new ITShowEntities())//修改短趣
+            using (var db = new ITShowEntities())
             {
                 Event person = (from it in db.Event where it.EventId == id select it).FirstOrDefault();
 
@@ -123,11 +124,11 @@ public partial class EventEditor : System.Web.UI.Page
     protected void btnImage_Click(object sender, EventArgs e)
     {
         int id = Convert.ToInt32(Request.QueryString["id"]);
-        ArrayList arr = new ArrayList();
-        arr = (ArrayList)Session["infor"];
-        txtContent.Text = arr[0].ToString();
-        txtTime.Value = arr[1].ToString();
-        Session["infor"] = arr;
-        Response.Write("<script>location='PhotoCut.aspx?type=3&&type1=1&&id=" + id + "'");
+        HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["content"] = Server.UrlEncode(txtContent.Text.Trim());
+        cookie.Values["time"] = Server.UrlEncode(txtTime.Value);
+        cookie.Expires = System.DateTime.Now.AddMinutes(3);
+        Response.Cookies.Add(cookie);
+        Response.Write("<script>location='PhotoCut.aspx?type=3&&type1=1&&id=" + id + "'</script>");
     }
 }

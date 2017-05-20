@@ -45,7 +45,7 @@
 				<th width="150">登录名</th>				
 				<th width="150">邮箱</th>	
 				<th width="130">加入时间</th>
-				<th width="100">是否已启用</th>
+				
 				<th width="100">操作</th>
 			</tr>
 		</thead>
@@ -58,10 +58,10 @@
 				<td><%#Eval("AdminName") %></td>			
 				<td><%#Eval("AdminEmail") %></td>
 				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label label-success radius">已启用</span></td>
+				
 				<td class="td-manage">
-                    <a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
-                        <i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','ManagerAdmin.aspx?id=<%#Eval("AdminId") %>','1','800','500')" class="ml-5" style="text-decoration:none">
+                   
+                        <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','ManagerAdmin.aspx?id=<%#Eval("AdminId") %>','1','800','500')" class="ml-5" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6df;</i></a> 
                     <asp:LinkButton ID="lkDelete" runat="server" OnClientClick="return confirm('确定要删除此管理员？')" CommandArgument='<%#Eval("AdminId") %>' CommandName="Delete" CssClass="ml-5" >
                         <i class="Hui-iconfont">&#xe6e2;</i></asp:LinkButton></td>

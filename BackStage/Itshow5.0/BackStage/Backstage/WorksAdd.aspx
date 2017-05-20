@@ -6,6 +6,12 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+<script type="text/javascript">
+function layer_close(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+}
+</script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -27,7 +33,22 @@
         <br />
         <br />
         网站链接：<br />
-        <asp:TextBox ID="txtLink" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtLink" runat="server" onblur="check()"></asp:TextBox>
+        <script>
+                  function check() {                 
+                      var temp = document.getElementById("txtLink").value;
+                      var aaa = document.getElementById("txtLink");
+                      var match = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/;
+
+                      if (!match.test(temp)) {
+                          aaa.value = "";
+                          alert('提示\n\n请输入有效URL');
+                          myreg.focus();
+
+                      }
+                 
+                  }
+              </script>
         <br />
         <br />
         网站上线时间：<br />

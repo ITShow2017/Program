@@ -9,10 +9,10 @@
           <Key>
             <PropertyRef Name="AdminId" />
           </Key>
-          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
           <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminPassword" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="AdminImage" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdminImage" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdminEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Flag" Type="bit" Nullable="false" />
         </EntityType>
@@ -21,14 +21,15 @@
             <PropertyRef Name="ApplicationId" />
           </Key>
           <Property Name="ApplicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Sex" Type="bit" />
-          <Property Name="MajorGrade" Type="nvarchar" MaxLength="50" />
-          <Property Name="Telephone" Type="nchar" MaxLength="50" />
-          <Property Name="Department" Type="nvarchar" MaxLength="50" />
-          <Property Name="QQ" Type="nchar" MaxLength="50" />
-          <Property Name="Introdution" Type="nvarchar" MaxLength="100" />
-          <Property Name="Time" Type="datetime" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+          <Property Name="Major" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QQ" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Introdution" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Grade" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -56,7 +57,7 @@
           <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MessageContent" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MessageComment" Type="nvarchar" MaxLength="100" />
-          <Property Name="MessageAdminId" Type="int" />
+          <Property Name="MessageAdminName" Type="nvarchar" MaxLength="50" />
           <Property Name="MessageTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Question">
@@ -88,36 +89,6 @@
           <Property Name="WorksImage" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="WorksTime" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6002: 表/视图“ITShow.dbo.MessageAdmin”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
-        <EntityType Name="MessageAdmin">
-          <Key>
-            <PropertyRef Name="MessageId" />
-            <PropertyRef Name="MessageContent" />
-            <PropertyRef Name="MessageTime" />
-            <PropertyRef Name="AdminName" />
-          </Key>
-          <Property Name="MessageId" Type="int" Nullable="false" />
-          <Property Name="MessageContent" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="MessageComment" Type="nvarchar" MaxLength="100" />
-          <Property Name="MessageAdminId" Type="int" />
-          <Property Name="MessageTime" Type="datetime" Nullable="false" />
-          <Property Name="AdminName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Message_Admin">
-          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Message" Type="Self.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Admin">
-              <PropertyRef Name="AdminId" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="MessageAdminId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Question_Admin">
           <End Role="Admin" Type="Self.Admin" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -141,20 +112,6 @@
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MessageAdmin" EntityType="Self.MessageAdmin" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[MessageAdmin].[MessageId] AS [MessageId], 
-[MessageAdmin].[MessageContent] AS [MessageContent], 
-[MessageAdmin].[MessageComment] AS [MessageComment], 
-[MessageAdmin].[MessageAdminId] AS [MessageAdminId], 
-[MessageAdmin].[MessageTime] AS [MessageTime], 
-[MessageAdmin].[AdminName] AS [AdminName]
-FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_Message_Admin" Association="Self.FK_Message_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
           <AssociationSet Name="FK_Question_Admin" Association="Self.FK_Question_Admin">
             <End Role="Admin" EntitySet="Admin" />
             <End Role="Question" EntitySet="Question" />
@@ -168,13 +125,12 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
           <Key>
             <PropertyRef Name="AdminId" />
           </Key>
-          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
           <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdminPassword" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="AdminImage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AdminImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdminEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Flag" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Message" Relationship="Self.FK_Message_Admin" FromRole="Admin" ToRole="Message" />
           <NavigationProperty Name="Question" Relationship="Self.FK_Question_Admin" FromRole="Admin" ToRole="Question" />
         </EntityType>
         <EntityType Name="Application">
@@ -182,14 +138,15 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
             <PropertyRef Name="ApplicationId" />
           </Key>
           <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Sex" Type="Boolean" />
-          <Property Name="MajorGrade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="QQ" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Introdution" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QQ" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Introdution" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Grade" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -217,9 +174,8 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
           <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MessageContent" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MessageComment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MessageAdminId" Type="Int32" />
+          <Property Name="MessageAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MessageTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Admin" Relationship="Self.FK_Message_Admin" FromRole="Message" ToRole="Admin" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -251,20 +207,6 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
           <Property Name="WorksImage" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="WorksTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK_Message_Admin">
-          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Message" Type="Self.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Admin">
-              <PropertyRef Name="AdminId" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="MessageAdminId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Question_Admin">
           <End Role="Admin" Type="Self.Admin" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -288,30 +230,11 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
           <EntitySet Name="Question" EntityType="Self.Question" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Works" EntityType="Self.Works" />
-          <AssociationSet Name="FK_Message_Admin" Association="Self.FK_Message_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
           <AssociationSet Name="FK_Question_Admin" Association="Self.FK_Question_Admin">
             <End Role="Admin" EntitySet="Admin" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
-          <EntitySet Name="MessageAdmin" EntityType="ITShowModel.MessageAdmin" />
         </EntityContainer>
-        <EntityType Name="MessageAdmin">
-          <Key>
-            <PropertyRef Name="MessageId" />
-            <PropertyRef Name="MessageContent" />
-            <PropertyRef Name="MessageTime" />
-            <PropertyRef Name="AdminName" />
-          </Key>
-          <Property Name="MessageId" Type="Int32" Nullable="false" />
-          <Property Name="MessageContent" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MessageComment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MessageAdminId" Type="Int32" />
-          <Property Name="MessageTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -336,12 +259,13 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="MajorGrade" ColumnName="MajorGrade" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="QQ" ColumnName="QQ" />
                 <ScalarProperty Name="Introdution" ColumnName="Introdution" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -372,7 +296,7 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
                 <ScalarProperty Name="MessageId" ColumnName="MessageId" />
                 <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
                 <ScalarProperty Name="MessageComment" ColumnName="MessageComment" />
-                <ScalarProperty Name="MessageAdminId" ColumnName="MessageAdminId" />
+                <ScalarProperty Name="MessageAdminName" ColumnName="MessageAdminName" />
                 <ScalarProperty Name="MessageTime" ColumnName="MessageTime" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -406,18 +330,6 @@ FROM [dbo].[MessageAdmin] AS [MessageAdmin]</DefiningQuery>
                 <ScalarProperty Name="WorksUrl" ColumnName="WorksUrl" />
                 <ScalarProperty Name="WorksImage" ColumnName="WorksImage" />
                 <ScalarProperty Name="WorksTime" ColumnName="WorksTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MessageAdmin">
-            <EntityTypeMapping TypeName="ITShowModel.MessageAdmin">
-              <MappingFragment StoreEntitySet="MessageAdmin">
-                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
-                <ScalarProperty Name="MessageTime" ColumnName="MessageTime" />
-                <ScalarProperty Name="MessageAdminId" ColumnName="MessageAdminId" />
-                <ScalarProperty Name="MessageComment" ColumnName="MessageComment" />
-                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
-                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

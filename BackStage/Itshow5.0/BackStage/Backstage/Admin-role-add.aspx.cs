@@ -9,20 +9,24 @@ public partial class BackStage_Backstage_Admin_role_add : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        using (var db = new ITShowEntities())
-        {
-            string username = Session["username"].ToString();
-
-            Admin admin = db.Admin.SingleOrDefault(a => a.AdminName == username);
-            if (admin.AdminId != 3)
-            {
-                Response.Write("<script>alert('你没有权限使用此功能！');location='Admin-role.aspx'</script>");
-            }
-        }
         if (Session["username"] == null)
         {
             Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");
         }
+        else
+        {
+            using (var db = new ITShowEntities())
+            {
+                string username = Session["username"].ToString();
+
+                Admin admin = db.Admin.SingleOrDefault(a => a.AdminName == username);
+                if (admin.AdminId != 3)
+                {
+                    Response.Write("<script>alert('你没有权限使用此功能！');location='Admin-role.aspx'</script>");
+                }
+            }
+        }
+
     }
     protected void BtnRegister_Click(object sender, EventArgs e)
     {

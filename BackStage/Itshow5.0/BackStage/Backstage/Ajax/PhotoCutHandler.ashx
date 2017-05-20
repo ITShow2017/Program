@@ -28,7 +28,10 @@ public class PhotoCutHandler : IHttpHandler,IRequiresSessionState {
         System.Drawing.Bitmap img = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromStream(stream, false); //转换成Bitmap
         img.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
         string path = "File/" + name;
-        context.Session["url"] = path;
+        HttpCookie cookies = new HttpCookie("url");//添加到cookie
+        cookies.Value = path;
+        cookies.Expires = DateTime.Now.AddMinutes(1);
+        context.Response.Cookies.Add(cookies);
 
 
 

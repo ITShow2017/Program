@@ -23,11 +23,19 @@
 <![endif]-->
 <title>首页</title>
 </head>
+
 <body>
     <form id="form1" runat="server" >
 
 <div class="page-container">
+    <asp:Image ID="img" runat="server" Width="80px" />
+	<br />
 	<p class="f-20 text-success">欢迎登录爱特工作室展示网后台！<%--<span class="f-14">3.0</span>--%></p>
+    <asp:LinkButton ID="lbemail" runat="server" Text="邮箱尚未激活" OnClick="lbemail_Click" ToolTip="点击发送验证码"></asp:LinkButton><br />
+    <div id="divemail" runat="server" visible="false" >
+   邮箱验证码： <asp:TextBox ID="txtemail" CssClass="input-text size-L" runat="server" ></asp:TextBox>
+        <asp:Button ID="btnemail" runat="server" Text="确定"  CssClass="btn btn-success radius size-L"  OnClick="btnemail_Click" />
+        </div>
 	<%--<p>登录次数：18 </p>
 	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>--%>
 	<%--<table class="table table-border table-bordered table-bg">

@@ -32,6 +32,10 @@
              if (self.frameElement && self.frameElement.tagName == "IFRAME") {
                   parent.location.reload();//父页面重新加载
              }
+             if ($("#passWord").val()!= "密码" &&$("#passWord").val()!= "")
+             {
+                 $("#passWord").attr("type", "password");
+             }
          };
      </script>
 </head>
@@ -64,15 +68,17 @@
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
           <label for="online">
-            <input type="checkbox" name="online" id="online" value="">
-            使我保持登录状态</label>
+              <asp:CheckBox ID="checkRemember" runat="server" />记住用户密码
+          <%--  <input type="checkbox" runat="server" name="online" id="online" value="">
+            记住用户密码 --%>
+              </label>
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <%--<input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">--%>
+
              <asp:Button ID="BtnLogin" runat="server" CssClass="btn btn-success radius size-L" OnClick="BtnLogin_Click" Text="登录" />
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+            <asp:Button ID="BtnForget" runat="server" CssClass="btn btn-default radius size-L" PostBackUrl="~/BackStage/Backstage/FindPassword.aspx" Text="忘记密码" />
         </div>
       </div>
     </form>
@@ -96,9 +102,20 @@
             if(this.value=="密码")
                 $(this).val("");
         })
+        $("#passWord").focus(function () {
+            $("#passWord").attr("type", "password");
+            if (this.value != "密码"&&this.value !="")
+                $(this).val("");
+        })
         $("#passWord").blur(function(){
             if($(this).val()=="")
                 $(this).val("密码").attr("type","text");})
     </script>
+     <%--   <script type="text/javascript">
+             document.ready= function () {
+                 if ($("#passWord").val()!= "密码" &&$("#passWord").val()!= "")
+                 { $("#passWord").attr("type", "password");
+                 }}
+    </script>--%>
 </body>
 </html>

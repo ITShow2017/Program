@@ -17,27 +17,23 @@ public partial class WorksAdd : System.Web.UI.Page
         }
         else if (!IsPostBack)
         {
-            if (Session["infor"] != null || Session["url"] != null)
+            if (Request.Cookies["arr"] != null)
             {
-                if (Session["infor"] != null)
-                {
-                    ArrayList arr = new ArrayList();
-                    arr = (ArrayList)Session["infor"];
-                    txtTitle.Text = arr[0].ToString();
-                    txtLink.Text = arr[1].ToString();
-                    txtTime.Value = arr[2].ToString();
+                txtTitle.Text = Server.UrlDecode(Request.Cookies["arr"]["title"]).ToString();
+                txtLink.Text = Server.UrlDecode(Request.Cookies["arr"]["link"]).ToString();
+                txtTime.Value = Server.UrlDecode(Request.Cookies["arr"]["time"]).ToString();
 
-                    Session["infor"] = null;
-                }
-
-                if (Session["url"] != null)
-                {
-                    img.Visible = true;
-                    img.ImageUrl = Session["url"].ToString();
-                    Session["url"] = null;
-                }
-                //else
-                //    Response.Write("<script>alert('照片上传失败请重试')</script>");
+                HttpCookie cookies = Request.Cookies["arr"];//删除cookies
+                cookies.Expires = System.DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookies);
+            }
+            if (Request.Cookies["url"] != null)
+            {
+                img.Visible = true;
+                img.ImageUrl = Request.Cookies["url"].Value;
+                HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookies1);
             }
         }
     }
@@ -72,7 +68,7 @@ public partial class WorksAdd : System.Web.UI.Page
                 db.Works.Add(person);
 
                 if (db.SaveChanges() == 1)
-                    Response.Write("<script>alert('添加成功');location='WorksList.aspx'</script>");
+                    ClientScript.RegisterStartupScript(ClientScript.GetType(), "myscript", "<script >alert('添加成功');layer_close();</script>");
                 else
                     Response.Write("<script>alert('添加失败请重试')</script>");
             }
@@ -83,10 +79,13 @@ public partial class WorksAdd : System.Web.UI.Page
 
     protected void btnImage_Click(object sender, EventArgs e)
     {
-        ArrayList arr = new ArrayList();
-        arr.Add(txtTitle.Text.Trim());
-        arr.Add(txtLink.Text.Trim());
-        arr.Add(txtTime.Value);
+        HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["title"] = Server.UrlEncode(txtTitle.Text.Trim());
+        cookie.Values["link"] = Server.UrlEncode(txtLink.Text.Trim());
+        cookie.Values["time"] = Server.UrlEncode(txtTime.Value);
+        cookie.Expires = System.DateTime.Now.AddMinutes(3);
+        Response.Cookies.Add(cookie);
+
         Response.Write("<script>location='PhotoCut.aspx?type=2&&type1=0'</script>");
     }
 }

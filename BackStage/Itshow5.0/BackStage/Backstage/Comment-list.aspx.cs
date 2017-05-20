@@ -14,25 +14,28 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
         {
             Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");
         }
-        if (Session["list"] == null)
+        else
         {
-            ReturnList();
-        }
-        if (!IsPostBack)
-        {
-            ReturnList();
-            RptDataBind(1,(List<MessageAdmin>)Session["list"]);
+            if (Session["list"] == null)
+            {
+                ReturnList();
+            }
+            if (!IsPostBack)
+            {
+                ReturnList();
+                RptDataBind(1, (List<Message>)Session["list"]);
+            }
         }
     }
     protected void ReturnList()
     {
         using (var db = new ITShowEntities())
         {
-            var datascore = from it in db.MessageAdmin orderby it.MessageTime select it;
+            var datascore = from it in db.Message orderby it.MessageTime select it;
             Session["list"] = datascore.ToList();
         }
     }
-    protected void RptDataBind(int currentPage ,List<MessageAdmin>message)
+    protected void RptDataBind(int currentPage ,List<Message>message)
     {
         PagedDataSource pds = new PagedDataSource();
 
@@ -79,7 +82,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 {
 
                     //查询含有某个字符的留言
-                    var select = from it in db.MessageAdmin where (it.MessageContent.Contains(txtKeyComment.Text)) select it;
+                    var select = from it in db.Message where (it.MessageContent.Contains(txtKeyComment.Text)) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -111,7 +114,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 using (var db = new ITShowEntities())
                 {
 
-                    var select = from it in db.MessageAdmin where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime > mindate) select it;
+                    var select = from it in db.Message where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime > mindate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -141,7 +144,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 using (var db = new ITShowEntities())
                 {
 
-                    var select = from it in db.MessageAdmin where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime < maxdate) select it;
+                    var select = from it in db.Message where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime < maxdate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -173,7 +176,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 DateTime maxdate = Convert.ToDateTime(datemax.Value);
                 using (var db = new ITShowEntities())
                 {
-                    var select = from it in db.MessageAdmin where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime < maxdate && it.MessageTime > mindate) select it;
+                    var select = from it in db.Message where (it.MessageContent.Contains(txtKeyComment.Text) && it.MessageTime < maxdate && it.MessageTime > mindate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -203,7 +206,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
             {
                 ReturnList();
 
-                RptDataBind(1, (List<MessageAdmin>)Session["list"]);
+                RptDataBind(1, (List<Message>)Session["list"]);
             }
             if (datemin.Value != "" && datemax.Value == "")
             {
@@ -213,7 +216,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 using (var db = new ITShowEntities())
                 {
 
-                    var select = from it in db.MessageAdmin where (it.MessageTime > mindate) select it;
+                    var select = from it in db.Message where (it.MessageTime > mindate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -243,7 +246,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 using (var db = new ITShowEntities())
                 {
 
-                    var select = from it in db.MessageAdmin where (it.MessageTime < maxdate) select it;
+                    var select = from it in db.Message where (it.MessageTime < maxdate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -275,7 +278,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
                 DateTime maxdate = Convert.ToDateTime(datemax.Value);
                 using (var db = new ITShowEntities())
                 {
-                    var select = from it in db.MessageAdmin where (it.MessageTime < maxdate && it.MessageTime > mindate) select it;
+                    var select = from it in db.Message where (it.MessageTime < maxdate && it.MessageTime > mindate) select it;
 
                     PagedDataSource pds = new PagedDataSource();
 
@@ -307,19 +310,19 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
         {
             lbNow.Text = Convert.ToString(Convert.ToInt32(lbNow.Text) + 1);
 
-            RptDataBind(Convert.ToInt32(lbNow.Text), (List<MessageAdmin>)Session["list"]);
+            RptDataBind(Convert.ToInt32(lbNow.Text), (List<Message>)Session["list"]);
         }
     }
     protected void btnFirst_Click(object sender, EventArgs e)
     {
         lbNow.Text = Convert.ToString(1);
-        RptDataBind(1, (List<MessageAdmin>)Session["list"]);
+        RptDataBind(1, (List<Message>)Session["list"]);
     }
     protected void btnLast_Click(object sender, EventArgs e)
     {
         lbNow.Text = lbTotal.Text;
 
-        RptDataBind(Convert.ToInt32(lbTotal.Text), (List<MessageAdmin>)Session["list"]);
+        RptDataBind(Convert.ToInt32(lbTotal.Text), (List<Message>)Session["list"]);
     }
     protected void btnJump_Click(object sender, EventArgs e)
     {
@@ -329,7 +332,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
             {
                 lbNow.Text = txtJump.Text;
 
-                RptDataBind(Convert.ToInt32(txtJump.Text), (List<MessageAdmin>)Session["list"]);
+                RptDataBind(Convert.ToInt32(txtJump.Text), (List<Message>)Session["list"]);
             }
         }
     }
@@ -339,7 +342,7 @@ public partial class BackStage_Backstage_Comment_list : System.Web.UI.Page
         {
             lbNow.Text = Convert.ToString(Convert.ToInt32(lbNow.Text) - 1);
 
-            RptDataBind(Convert.ToInt32(lbNow.Text), (List<MessageAdmin>)Session["list"]);
+            RptDataBind(Convert.ToInt32(lbNow.Text), (List<Message>)Session["list"]);
         }
     }
 }

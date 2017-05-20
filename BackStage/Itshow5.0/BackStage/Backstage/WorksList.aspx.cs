@@ -71,6 +71,12 @@ public partial class WorksList : System.Web.UI.Page
                     Response.Write("<script>alert('删除失败请重试');location='WorksList.aspx'</script>");
             }
         }
+        //if (e.CommandName == "URL")
+        //{
+        //    //string url = Server.UrlEncode (e.CommandArgument.ToString().Trim());
+        //    string url = e.CommandArgument.ToString().Trim();
+        //    Response.Write("<script>window.open('http://www.baidu.com','_blank')</script>");
+        //}
     }
 
     protected void btnUp_Click(object sender, EventArgs e)

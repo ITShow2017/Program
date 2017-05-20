@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -9,7 +10,14 @@ public partial class BackStage_Backstage_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["admin1"] != null)
+        {
+            HttpCookie cookie = Request.Cookies["admin1"];
+            //this.userName.Attributes.Add("value", cookie.Values["name"]);
+            //this.passWord.Attributes.Add("value", cookie.Values["password"]);
+            userName.Text = cookie.Values["name"];
+            passWord.Text = cookie.Values["password"];
+        }
     }
 
     protected void BtnLogin_Click(object sender, EventArgs e)
@@ -48,6 +56,19 @@ public partial class BackStage_Backstage_Login : System.Web.UI.Page
                         }
                         else
                         {
+                            if (checkRemember.Checked)
+                            {
+                                HttpCookie userInfo = new HttpCookie("admin1");
+                                userInfo.Values["name"] = userName.Text;
+                                userInfo.Values["password"] = passWord.Text;                           
+                                userInfo.Expires = DateTime.Now.AddDays(15); // 15天记住我                              
+                                Response.Cookies.Add(userInfo);
+                            }
+                            else
+                            {
+                                HttpCookie cookie = Response.Cookies["admin1"];
+                                cookie.Expires = DateTime.Now.AddDays(-1);
+                            }
                             Session["username"] = userName.Text.Trim();
 
                             Response.Write("<script>alert('登录成功！');location='index.aspx'</script>");

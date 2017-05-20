@@ -10,32 +10,33 @@ public partial class MemberAdd : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Session["username"] == null)
         {
-            if (Session["username"] == null)
+            Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");
+        }
+        else
+        {
+            if (!IsPostBack)
             {
-                Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");
-            }
-            if (Session["infor"] != null || Session["url"] != null)
-            {
-                if (Session["infor"] != null)
+
+                if (Request.Cookies["arr"] != null)
                 {
-                    ArrayList arr = new ArrayList();
-                    arr = (ArrayList)Session["infor"];
-                    txtName.Text = arr[0].ToString();
-                    dropDepartment.SelectedValue = arr[1].ToString();
-                    dropGrade.SelectedValue = arr[2].ToString();
-
-                    Session["infor"] = null;
-
+                    txtName.Text = Server.UrlDecode(Request.Cookies["arr"]["name"]);
+                    dropDepartment.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["dpt"]);
+                    dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
+                    HttpCookie cookies = Request.Cookies["arr"];//删除cookies
+                    cookies.Expires = System.DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(cookies);
                 }
-                if (Session["url"] != null)
+                if (Request.Cookies["url"] != null)
                 {
                     img.Visible = true;
-                    img.ImageUrl = Session["url"].ToString();
-                    Session["url"] = null;
+                    img.ImageUrl = Request.Cookies["url"].Value;
+                    HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                    cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(cookies1);
+
                 }
-               
             }
         }
     }
@@ -68,7 +69,7 @@ public partial class MemberAdd : System.Web.UI.Page
                 db.Member.Add(person);
 
                 if (db.SaveChanges() == 1)
-                    Response.Write("<script>alert('添加成功');location='MemberList.aspx'</script>");
+                    ClientScript.RegisterStartupScript(ClientScript.GetType(), "myscript", "<script >alert('添加成功');layer_close();</script>");
                 else
                     Response.Write("<script>alert('添加失败请重试')</script>");
             }
@@ -81,11 +82,13 @@ public partial class MemberAdd : System.Web.UI.Page
 
     protected void btnImage_Click(object sender, EventArgs e)
     {
-        ArrayList arr = new ArrayList();
-        arr.Add(txtName.Text.Trim());
-        arr.Add(dropDepartment.SelectedValue);
-        arr.Add(dropGrade.SelectedValue);
-        Session["infor"] = arr;
+        HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["name"] = Server.UrlEncode(txtName.Text.Trim());
+        cookie.Values["dpt"] = Server.UrlEncode(dropDepartment.SelectedValue);
+        cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);
+        cookie.Expires = System.DateTime.Now.AddMinutes(3);
+        Response.Cookies.Add(cookie);
+       
         Response.Write("<script>location='PhotoCut.aspx?type=1&&type1=0'</script>");
     }
 }

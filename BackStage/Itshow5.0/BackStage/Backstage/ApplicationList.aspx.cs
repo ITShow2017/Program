@@ -384,35 +384,35 @@ public partial class ApplicationList : System.Web.UI.Page
     //}
 
 
-    protected void btnDelete_Click(object sender, EventArgs e)
-    {
-        lbDelete.Visible = true;
-        txtTime1.Visible = true;
-    }
+    //protected void btnDelete_Click(object sender, EventArgs e)
+    //{
+    //    lbDelete.Visible = true;
+    //    txtTime1.Visible = true;
+    //}
 
-    protected void lbDelete_Click(object sender, EventArgs e)
-    {
-        string time = txtTime1.Value;
+    //protected void lbDelete_Click(object sender, EventArgs e)
+    //{
+    //    string time = txtTime1.Value;
 
-        if (time.Length > 0)
-        {
-            using (var db = new ITShowEntities())
-            {
-                List<Application> person = (from it in db.Application where it.Time <= Convert.ToDateTime(time) select it).ToList();
+    //    if (time.Length > 0)
+    //    {
+    //        using (var db = new ITShowEntities())
+    //        {
+    //            List<Application> person = (from it in db.Application where it.Time <= Convert.ToDateTime(time) select it).ToList();
 
-                int count = person.Count;
-                foreach (var item in person)
-                {
-                    db.Application.Remove(item);
-                }
-                if (db.SaveChanges() == count)
-                    Response.Write("<script>alert('删除成功')</script>");
-                else
-                    Response.Write("<script>alert('删除失败请重试')</script>");
+    //            int count = person.Count;
+    //            foreach (var item in person)
+    //            {
+    //                db.Application.Remove(item);
+    //            }
+    //            if (db.SaveChanges() == count)
+    //                Response.Write("<script>alert('删除成功')</script>");
+    //            else
+    //                Response.Write("<script>alert('删除失败请重试')</script>");
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
     protected void BtnImport_Click(object sender, EventArgs e)
     {
         if (DdlSelect.SelectedValue == "1")

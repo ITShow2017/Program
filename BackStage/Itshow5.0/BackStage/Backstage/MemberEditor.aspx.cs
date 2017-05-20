@@ -41,26 +41,22 @@ public partial class MemberEditor : System.Web.UI.Page
 
                             btnImage.ImageUrl = person.MemberImage;//成员照片
 
-                            if (Session["infor"] != null || Session["url"] != null)
+                            if (Request.Cookies["arr"] != null)
                             {
-                                if (Session["infor"] != null)
-                                {
-                                    ArrayList arr = new ArrayList();
-                                    arr = (ArrayList)Session["infor"];
-                                    txtName.Text = arr[0].ToString();
-                                    dropDepartment.SelectedValue = arr[1].ToString();
-                                    dropGrade.SelectedValue = arr[2].ToString();
+                                txtName.Text = Server.UrlDecode(Request.Cookies["arr"]["name"]);
+                                dropDepartment.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["dpt"]);
+                                dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
+                                HttpCookie cookies = Request.Cookies["arr"];//删除cookies
+                                cookies.Expires = System.DateTime.Now.AddDays(-1);
+                                Response.Cookies.Add(cookies);
+                            }
 
-                                    Session["infor"] = null;
-                                }
-
-                                if (Session["url"] != null)
-                                {
-                                    btnImage.ImageUrl = Session["url"].ToString();
-                                    Session["url"] = null;
-                                }
-                                //else
-                                //    Response.Write("<script>alert('照片上传失败请重试')</script>");
+                            if (Request.Cookies["url"] != null)
+                            {
+                                btnImage.ImageUrl = Request.Cookies["url"].Value;
+                                HttpCookie cookies1 = Request.Cookies["url"];//删除cookies
+                                cookies1.Expires = System.DateTime.Now.AddDays(-1);
+                                Response.Cookies.Add(cookies1);
                             }
                         }
                         else
@@ -108,11 +104,13 @@ public partial class MemberEditor : System.Web.UI.Page
     protected void btnImage_Click(object sender, ImageClickEventArgs e)
     {
         int id = Convert.ToInt32(Request.QueryString["id"]);
-        ArrayList arr = new ArrayList();
-        arr.Add(txtName.Text.Trim());
-        arr.Add(dropDepartment.SelectedValue);
-        arr.Add(dropGrade.SelectedValue);
-        Session["infor"] = arr;
+        HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["name"] = Server.UrlEncode(txtName.Text.Trim());
+        cookie.Values["dpt"] = Server.UrlEncode(dropDepartment.SelectedValue);
+        cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);
+        cookie.Expires = System.DateTime.Now.AddMinutes(3);
+        Response.Cookies.Add(cookie);
+
         Response.Write("<script>location='PhotoCutM.aspx?type=1&&type1=1&&id="+id+"'</script>");
     }
 }

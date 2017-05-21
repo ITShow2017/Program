@@ -50,28 +50,33 @@ public partial class WorksAdd : System.Web.UI.Page
 
         Regex r = new Regex(Pattern);
 
-        if (link.Length > 0&&time.Length>0 && r.IsMatch(link) && title.Length > 0&&img.ImageUrl.Length>0)//都不能为空
+        if (link.Length > 0&&time.Length>0  && title.Length > 0&&img.ImageUrl.Length>0)//都不能为空
         {
-            using (var db = new ITShowEntities())
+            if (r.IsMatch(link))
             {
-                Works person = new Works()
+                using (var db = new ITShowEntities())
                 {
-                    WorksName = title,
+                    Works person = new Works()
+                    {
+                        WorksName = title,
 
-                    WorksUrl = link,
+                        WorksUrl = link,
 
-                    WorksTime=Convert.ToDateTime( time),
+                        WorksTime = Convert.ToDateTime(time),
 
-                    WorksImage=img.ImageUrl
-                };
+                        WorksImage = img.ImageUrl
+                    };
 
-                db.Works.Add(person);
+                    db.Works.Add(person);
 
-                if (db.SaveChanges() == 1)
-                    ClientScript.RegisterStartupScript(ClientScript.GetType(), "myscript", "<script >alert('添加成功');layer_close();</script>");
-                else
-                    Response.Write("<script>alert('添加失败请重试')</script>");
+                    if (db.SaveChanges() == 1)
+                        ClientScript.RegisterStartupScript(ClientScript.GetType(), "myscript", "<script >alert('添加成功');layer_close();</script>");
+                    else
+                        Response.Write("<script>alert('添加失败请重试')</script>");
+                }
             }
+            Response.Write("<script>alert('请输入有效URL,http/https格式')</script>");
+
         }
         else
             Response.Write("<script>alert('不能为空')</script>");

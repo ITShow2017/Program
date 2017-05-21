@@ -21,6 +21,7 @@ public partial class MemberAdd : System.Web.UI.Page
 
                 if (Request.Cookies["arr"] != null)
                 {
+                    dropYear.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["year"]);
                     txtName.Text = Server.UrlDecode(Request.Cookies["arr"]["name"]);
                     dropDepartment.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["dpt"]);
                     dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
@@ -43,6 +44,8 @@ public partial class MemberAdd : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
+        string year = dropYear.SelectedValue;//届数
+
         string name = txtName.Text.Trim();
 
         string department = dropDepartment.SelectedValue;
@@ -63,7 +66,9 @@ public partial class MemberAdd : System.Web.UI.Page
 
                     MemberName = name,
 
-                    MemberImage = img.ImageUrl
+                    MemberImage = img.ImageUrl,
+
+                    MemberYear=year
                 };
 
                 db.Member.Add(person);
@@ -83,6 +88,7 @@ public partial class MemberAdd : System.Web.UI.Page
     protected void btnImage_Click(object sender, EventArgs e)
     {
         HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["year"] = Server.UrlEncode(dropYear.SelectedValue);
         cookie.Values["name"] = Server.UrlEncode(txtName.Text.Trim());
         cookie.Values["dpt"] = Server.UrlEncode(dropDepartment.SelectedValue);
         cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);

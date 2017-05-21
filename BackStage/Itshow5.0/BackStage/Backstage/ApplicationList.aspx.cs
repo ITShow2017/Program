@@ -62,9 +62,6 @@ public partial class ApplicationList : System.Web.UI.Page
 
             if (department == "全部")
             {
-                lbdpt.Visible = false;//显示部门成员数量
-
-                lbdptCount.Visible = false;
 
                 if (keyword != "")//有搜索内容
                 {
@@ -229,13 +226,12 @@ public partial class ApplicationList : System.Web.UI.Page
 
                     }
                 }
-                lbdpt.Visible = true;//显示部门报名数量
 
-                lbdptCount.Visible = true;
-
-                lbdptCount.Text = select.Count.ToString();//各部门报名数量
             }
             Session["ds"] = select;
+
+            lbdptCount.Text = select.Count.ToString();//该条件下的报名数量
+
         }
 
     }

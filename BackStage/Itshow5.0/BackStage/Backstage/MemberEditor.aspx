@@ -14,6 +14,15 @@
          
         <br />
         <br />
+        第几届：
+        <asp:DropDownList ID="dropYear" runat="server">
+            <asp:ListItem Selected="True">2016</asp:ListItem>
+            <asp:ListItem>2015</asp:ListItem>
+            <asp:ListItem>2014</asp:ListItem>
+            <asp:ListItem>2013</asp:ListItem>
+            <asp:ListItem>2012</asp:ListItem>
+        </asp:DropDownList>
+        <br />
         姓名：
         <asp:TextBox ID="txtName" runat="server" MaxLength="19" ></asp:TextBox>
         <br />
@@ -36,7 +45,7 @@
             <asp:ListItem>2012</asp:ListItem>
         </asp:DropDownList>
         <br />
-        照片：
+        照片(点击照片可进行修改)：
         <br />
         <asp:ImageButton ID="btnImage" runat="server" OnClick="btnImage_Click" />
         <br />

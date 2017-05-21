@@ -33,6 +33,8 @@ public partial class MemberEditor : System.Web.UI.Page
 
                         if (person != null)
                         {
+                            dropYear.SelectedValue = person.MemberYear;
+
                             txtName.Text = person.MemberName;
 
                             dropDepartment.SelectedValue = person.MemberDepartment;
@@ -43,6 +45,7 @@ public partial class MemberEditor : System.Web.UI.Page
 
                             if (Request.Cookies["arr"] != null)
                             {
+                                dropYear.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["year"]);
                                 txtName.Text = Server.UrlDecode(Request.Cookies["arr"]["name"]);
                                 dropDepartment.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["dpt"]);
                                 dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
@@ -90,6 +93,7 @@ public partial class MemberEditor : System.Web.UI.Page
                     person.MemberGrade = dropGrade.SelectedValue;
                     person.MemberDepartment = dropDepartment.SelectedValue;
                     person.MemberImage = btnImage.ImageUrl;//修改图片
+                    person.MemberYear = dropYear.SelectedValue;
                     if (db.SaveChanges() == 1)
                         Response.Write("<script>alert('编辑成功');location='MemberList.aspx'</script>");
                     else
@@ -105,6 +109,7 @@ public partial class MemberEditor : System.Web.UI.Page
     {
         int id = Convert.ToInt32(Request.QueryString["id"]);
         HttpCookie cookie = new HttpCookie("arr");
+        cookie.Values["year"] = Server.UrlEncode(dropYear.SelectedValue);
         cookie.Values["name"] = Server.UrlEncode(txtName.Text.Trim());
         cookie.Values["dpt"] = Server.UrlEncode(dropDepartment.SelectedValue);
         cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);

@@ -38,8 +38,8 @@
                  <a href="javascript:;" onclick="member_add('添加成员','MemberAdd.aspx','','510')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加成员</a></span> <span class="r">共有成员：<strong>
                 <asp:Label runat="server" ID="lbcount"></asp:Label></strong> 人</span> </div>
             <div class="mt-20">
-                年级：
-        <asp:DropDownList ID="grade" runat="server" AutoPostBack="true" OnSelectedIndexChanged="grade_SelectedIndexChanged">
+                届数：
+        <asp:DropDownList ID="year" runat="server" AutoPostBack="true" OnSelectedIndexChanged="year_SelectedIndexChanged">
             <asp:ListItem Selected="True">2016</asp:ListItem>
             <asp:ListItem>2015</asp:ListItem>
             <asp:ListItem>2014</asp:ListItem>
@@ -82,17 +82,18 @@
 
                     </tbody>
                 </table>
-                <%--       <div class="box">
-        <asp:Button CssClass="font-page" ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click"/>
-        <asp:Button CssClass="next-page" ID="btnDown" runat="server" Text="下一页"  OnClick="btnDown_Click"/>
-        <asp:Button CssClass="font-page" ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
-        <asp:Button CssClass="next-page" ID="btnLast" runat="server" Text="尾页"  OnClick="btnLast_Click" />
-        页次：<asp:Label CssClass="page" ID="lbNow" runat="server" Text="1"></asp:Label>
-        /<asp:Label CssClass="page" ID="lbTotal" runat="server" Text="1"></asp:Label>
-        转<asp:TextBox CssClass="page" ID="txtJump" Text="1" runat="server" Width="16px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
-         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat ="server" ControlToValidate ="txtJump" ></asp:RequiredFieldValidator> 
-        <asp:Button CssClass="next-page" ID="btnJump" runat="server" Text="Go"  OnClick="btnJump_Click"/>
-       </div> --%>
+                <div class="box">
+                    <asp:Button CssClass="font-page" ID="btnUp" runat="server" Text="上一页" OnClick="btnUp_Click" />
+                    <asp:Button CssClass="next-page" ID="btnDown" runat="server" Text="下一页" OnClick="btnDown_Click" />
+                    <asp:Button CssClass="font-page" ID="btnFirst" runat="server" Text="首页" OnClick="btnFirst_Click" />
+                    <asp:Button CssClass="next-page" ID="btnLast" runat="server" Text="尾页" OnClick="btnLast_Click" />
+                    页次：<asp:Label CssClass="page" ID="lbNow" runat="server" Text="1"></asp:Label>
+                    /<asp:Label CssClass="page" ID="lbTotal" runat="server" Text="1"></asp:Label>
+                    转<asp:TextBox CssClass="page" ID="txtJump" Text="1" runat="server" Width="16px" onkeyup="this.value=this.value.replace(/\D/g,'')"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtJump"></asp:RequiredFieldValidator>
+                    <asp:Button CssClass="next-page" ID="btnJump" runat="server" Text="Go" OnClick="btnJump_Click" />
+                </div>
+
             </div>
         </div>
         <!--_footer 作为公共模版分离出去-->

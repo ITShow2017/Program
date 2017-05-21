@@ -56,6 +56,7 @@ public partial class Member
     public string MemberImage { get; set; }
     public string MemberDepartment { get; set; }
     public string MemberGrade { get; set; }
+    public string MemberYear { get; set; }
 }
 
 public partial class Message
@@ -93,4 +94,19 @@ public partial class Works
     public string WorksUrl { get; set; }
     public string WorksImage { get; set; }
     public System.DateTime WorksTime { get; set; }
+}
+
+public partial class sp_helpdiagramdefinition_Result
+{
+    public Nullable<int> version { get; set; }
+    public byte[] definition { get; set; }
+}
+
+public partial class sp_helpdiagrams_Result
+{
+    public string Database { get; set; }
+    public string Name { get; set; }
+    public int ID { get; set; }
+    public string Owner { get; set; }
+    public int OwnerID { get; set; }
 }

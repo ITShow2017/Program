@@ -56,7 +56,7 @@
             <asp:ListItem>安卓App开发</asp:ListItem>
         </asp:DropDownList>
             <br />
-            <asp:Label ID="lbdpt" runat="server" Visible="false" Text="各部门报名数量:"></asp:Label>
+            各部门报名数量：
             <asp:Label ID="lbdptCount" runat="server"></asp:Label>
             <br />
 

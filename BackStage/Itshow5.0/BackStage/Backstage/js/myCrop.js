@@ -45,11 +45,11 @@ window.onload = function () {
           options.aspectRatio = aaa;
       }
       else if (type == 1) {
-          aaa = 1 / 2;
+          aaa = 1 / 1;
           options.aspectRatio = aaa;
       }
       else {
-          aaa = 1 / 2;
+          aaa = 2 / 1;
           options.aspectRatio = aaa;
       }
      

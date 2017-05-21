@@ -9,8 +9,7 @@ public partial class MemberList : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["url"] = null;
-        Session["arr"] = null;//清空储存编辑信息session
+
         if (Session["username"] == null)
         {
             Response.Write("<script>alert('尚未登录！');location='Login.aspx'</script>");
@@ -24,33 +23,56 @@ public partial class MemberList : System.Web.UI.Page
                     var person = (from it in db.Member select it);
 
                     lbcount.Text = person.ToList().Count.ToString();//找出所有的成员的人数
+
+                    var person1 = from it in db.Member where it.MemberYear == "2016" select it;
+
+                    Session["ds"] = person1.ToList();
                 }
 
-                dataBindToRpt("2016");
+                DataBindToRepeater(1);//显示16届成员
             }
 
         }
     }
-
-    protected void dataBindToRpt(string grade)
+    private void DataBindToRepeater(int currentPage)
     {
-        using (var db = new ITShowEntities())
-        {
-            var person = (from it in db.Member where it.MemberGrade == grade select it);
 
-            rpt.DataSource = person.ToList();
+        PagedDataSource pds = new PagedDataSource();
 
-            rpt.DataBind();
+        pds.AllowPaging = true;
 
-            lbcount1.Text = person.ToList().Count.ToString();//每届成员人数
-        }
+        pds.PageSize = 5;
+
+        pds.DataSource = (List<Member>)Session["ds"];
+
+        lbTotal.Text = pds.PageCount.ToString();
+
+        pds.CurrentPageIndex = currentPage - 1;
+
+        rpt.DataSource = pds;
+
+        rpt.DataBind();
+
     }
 
-    protected void grade_SelectedIndexChanged(object sender, EventArgs e)
+    protected void year_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string grade1 = grade.SelectedValue;
+        string year1 = year.SelectedValue;
 
-        dataBindToRpt(grade1);
+        using (var db = new ITShowEntities())
+        {
+            var person = (from it in db.Member select it);
+
+            lbcount.Text = person.ToList().Count.ToString();//找出所有的成员的人数
+
+            var person1 = from it in db.Member where it.MemberYear == year1 select it;
+
+            Session["ds"] = person1.ToList();
+
+            lbcount1.Text = person1.ToList().Count.ToString();
+        }
+
+        DataBindToRepeater(1);
 
     }
 
@@ -71,5 +93,61 @@ public partial class MemberList : System.Web.UI.Page
                     Response.Write("<script>alert('删除失败请重试');location='MemberList.aspx'</script>");
             }
         }
+    }
+    protected void btnUp_Click(object sender, EventArgs e)
+    {
+
+        if (Convert.ToInt32(lbNow.Text) - 1 < 1)
+            lbNow.Text = "1";
+
+        else
+            lbNow.Text = Convert.ToString(Convert.ToInt32(lbNow.Text) - 1);
+
+        DataBindToRepeater(Convert.ToInt32(lbNow.Text));
+    }
+
+    protected void btnDown_Click(object sender, EventArgs e)
+    {
+
+        if (Convert.ToInt32(lbNow.Text) + 1 <= Convert.ToInt32(lbTotal.Text))
+            lbNow.Text = Convert.ToString(Convert.ToInt32(lbNow.Text) + 1);
+
+        DataBindToRepeater(Convert.ToInt32(lbNow.Text));
+    }
+
+    protected void btnFirst_Click(object sender, EventArgs e)
+    {
+
+        lbNow.Text = "1";
+
+        DataBindToRepeater(Convert.ToInt32(lbNow.Text));
+    }
+
+    protected void btnLast_Click(object sender, EventArgs e)
+    {
+
+        lbNow.Text = Convert.ToString(Convert.ToInt32(lbTotal.Text));
+
+        DataBindToRepeater(Convert.ToInt32(lbNow.Text));
+    }
+
+    protected void btnJump_Click(object sender, EventArgs e)
+    {
+
+        int i = 0;
+
+        if (int.TryParse(txtJump.Text, out i))
+        {
+            if (Convert.ToInt32(txtJump.Text) < 1 || Convert.ToInt32(txtJump.Text) > Convert.ToInt32(lbTotal.Text))
+                txtJump.Text = Convert.ToString(Convert.ToInt32(lbNow.Text));
+
+            else
+                lbNow.Text = Convert.ToString(Convert.ToInt32(txtJump.Text));
+        }
+
+        else
+            txtJump.Text = Convert.ToString(Convert.ToInt32(lbNow.Text));
+
+        DataBindToRepeater(Convert.ToInt32(lbNow.Text));
     }
 }

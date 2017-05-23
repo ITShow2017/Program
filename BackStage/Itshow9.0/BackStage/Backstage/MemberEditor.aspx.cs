@@ -43,12 +43,21 @@ public partial class MemberEditor : System.Web.UI.Page
 
                             btnImage.ImageUrl = person.MemberImage;//成员照片
 
+                            txtIntruduction.Text = person.MemberInstruction;
+
+                            txtHobby.Text = person.MemberInterest;
+
+                            Constellation.SelectedValue = person.MemberConstellation;
+
                             if (Request.Cookies["arr"] != null)
                             {
                                 dropYear.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["year"]);
                                 txtName.Text = Server.UrlDecode(Request.Cookies["arr"]["name"]);
                                 dropDepartment.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["dpt"]);
                                 dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
+                                txtIntruduction.Text = Server.UrlDecode(Request.Cookies["arr"]["instruction"]);
+                                txtHobby.Text = Server.UrlDecode(Request.Cookies["arr"]["hobby"]);
+                                Constellation.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["constellation"]);
                                 HttpCookie cookies = Request.Cookies["arr"];//删除cookies
                                 cookies.Expires = System.DateTime.Now.AddDays(-1);
                                 Response.Cookies.Add(cookies);
@@ -120,6 +129,9 @@ public partial class MemberEditor : System.Web.UI.Page
         cookie.Values["name"] = Server.UrlEncode(txtName.Text.Trim());
         cookie.Values["dpt"] = Server.UrlEncode(dropDepartment.SelectedValue);
         cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);
+        cookie.Values["instruction"] = Server.UrlEncode(txtIntruduction.Text);
+        cookie.Values["hobby"] = Server.UrlEncode(txtHobby.Text);
+        cookie.Values["constellation"] = Server.UrlEncode(Constellation.SelectedValue);
         cookie.Expires = System.DateTime.Now.AddMinutes(3);
         Response.Cookies.Add(cookie);
 

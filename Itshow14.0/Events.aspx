@@ -8,7 +8,64 @@
 	<script type="text/javascript"  src="js/jquery.easing.min.js"></script>
 	<script type="text/javascript"  src="js/navigation.js"></script>
 	<script type="text/javascript"  src="js/event.js"></script>
-
+    	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="css/ie8.css">
+	<style>
+	.gray-circle{
+    behavior: url(./css/PIE.htc);
+	}
+	.image-circle
+	{
+    behavior: url(./css/PIE.htc);
+	}
+	</style>
+	<![endif]-->
+	<!--[if lte IE 7]>
+	<style>
+	.clock-box{
+    margin-left: -45px;
+	}
+	.clock a{
+    margin-left: -45px;
+	}
+	</style>
+	<![endif]-->
+	<!--[if lte IE 5]>
+	<style>
+	 .ie5-two-words-length
+    {
+    width:32px;
+    }
+    .ie5-three-words-length
+    {
+    width:50px;
+    }
+    .ie5-four-words-length
+    {
+    width:65px;
+    }
+    .ie5-five-words-length
+    {
+    width:80px;
+    }
+	.number span{
+	display:none;
+	}
+	.accomplishment-left{
+	margin-left:-5px;
+	}
+	.accomplishment-left img{
+	margin-left:0px;
+	}
+	.left-title{
+	width:200px;
+	}
+	.left-title span
+	{
+    top:0px;
+	}
+	</style>
+	<![endif]-->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <span class="mid-line1"></span>

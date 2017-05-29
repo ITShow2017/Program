@@ -1,5 +1,5 @@
 $(function(){
-	var i=0;
+	var i=-1;
 	appendcomment();
 	$(".container-comments").css({
 		"height":$(window).height(),

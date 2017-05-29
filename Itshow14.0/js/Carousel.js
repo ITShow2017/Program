@@ -77,6 +77,10 @@
 						   left = prev.css("left"),
 						   top = prev.css("top");
 							zIndexArr.push(zIndex);	
+							if(self.css("width")==_this_.setting.posterWidth+"px")
+						   {
+						   		self.children("a").find(".hide").css({"display":"none"})
+						   }
 						   self.animate({
 							   					width:width,
 												height:height,
@@ -89,9 +93,6 @@
 													   {
 													   	
 													   	self.children("a").find(".hide").css({"display":"block"})
-													   }
-													   else{
-													   	self.children("a").find(".hide").css({"display":"none"})
 													   }
 												});
 				});
@@ -109,7 +110,11 @@
 						   opacity = next.css("opacity"),
 						   left = next.css("left"),
 						   top = next.css("top");
-						   zIndexArr.push(zIndex);	
+						   zIndexArr.push(zIndex);
+						   if(self.css("width")==_this_.setting.posterWidth+"px")
+						   {
+						   		self.children("a").find(".hide").css({"display":"none"})
+						   }	
 						   self.animate({
 							   					width:width,
 												height:height,
@@ -124,9 +129,7 @@
 													   	
 													   	self.children("a").find(".hide").css({"display":"block"})
 													   }
-													   else{
-													   	self.children("a").find(".hide").css({"display":"none"})
-													   }
+													
 												});
 						   
 	

@@ -53,7 +53,7 @@ legend {
     color: #000000;
     }
 body {
-    font: 14px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
+    font: 16px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
     }
 select, input, button, textarea {
     font: 99% arial,helvetica,clean,sans-serif;
@@ -199,13 +199,12 @@ ul li{
 .accomplishment-left h2{
     
     position: absolute;
-    left: -131px;
+    left: -137px;
 }
 .accomplishment-right p{
    
-    margin-left: 60px;
+    margin-left: 75px;
 }
-
 .accomplishment-left img{
     margin-left: -5px;
 }
@@ -242,7 +241,7 @@ ul li{
     margin-left: -60px;
     margin-top: -15px;
     height: 21px;
-    width: 150px;
+    width: 170px;
 }
 .left-title img
 {
@@ -263,28 +262,8 @@ ul li{
      margin-right: 10px;
     
 }
-.open{
-    position: relative;
-    width: 700px;
-    height: 500px;
-    left: 50%;
-    position: fixed;
-    margin-left: -350px;
-    margin-top: -250px;
-    z-index: 12;
-    }
-.mask{
-    background-color:white;
-    opacity:0.9;
-    filter: alpha(opacity=50); 
-    position:absolute; 
-    left:0;
-    top:0;
-    z-index:10;
-}
-.bottomText{
-    position: relative;
-    top:500px;
-    text-align: center;
-
+.left-title h2
+{
+    font-size: 24px;
+    
 }

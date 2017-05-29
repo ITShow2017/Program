@@ -17,15 +17,7 @@
 		                    var rowYear = $("<h2>").text(data[j].EventTime).appendTo(rowLeft);
 		                    var rowDot = $("<img>").attr("src", "images/dot.png").appendTo(rowLeft);
 		                    var rowRight = $("<div>").addClass("accomplishment-right").appendTo(row);
-		                     var rowP = $("<p>").appendTo(rowRight);
-		                    var rowSpan = $("<span>").text(data[j].EventContent).appendTo( rowP);
-		                    if(data[j].EventImage!="")
-		                    {
-		                    	 var rowImg= $("<img>").attr("src", data[j].EventImage).appendTo(rowRight);
-		                    	 rowImg.css({"display":"none"})
-		                    }
-		                   
-		                    
+		                    var rowP = $("<p>").text(data[j].EventContent).appendTo(rowRight);
 		                }
 		                else if (year.slice(0, 4) == "2015") {
 		                    sumEvent15++;
@@ -34,13 +26,7 @@
 		                    var rowYear = $("<h2>").text(data[j].EventTime).appendTo(rowLeft);
 		                    var rowDot = $("<img>").attr("src", "images/dot.png").appendTo(rowLeft);
 		                    var rowRight = $("<div>").addClass("accomplishment-right").appendTo(row);
-		                     var rowP = $("<p>").appendTo(rowRight);
-		                    var rowSpan = $("<span>").text(data[j].EventContent).appendTo( rowP);
-		                    if(data[j].EventImage!="")
-		                    {
-		                    	 var rowImg= $("<img>").attr("src", data[j].EventImage).appendTo(rowRight);
-		                    	 rowImg.css({"display":"none"})
-		                    }
+		                    var rowP = $("<p>").text(data[j].EventContent).appendTo(rowRight);
 		                }
 		                else if (year.slice(0, 4) == "2016") {
 		                    sumEvent16++;
@@ -49,13 +35,7 @@
 		                    var rowYear = $("<h2>").text(data[j].EventTime).appendTo(rowLeft);
 		                    var rowDot = $("<img>").attr("src", "images/dot.png").appendTo(rowLeft);
 		                    var rowRight = $("<div>").addClass("accomplishment-right").appendTo(row);
-		                     var rowP = $("<p>").appendTo(rowRight);
-		                    var rowSpan = $("<span>").text(data[j].EventContent).appendTo( rowP);
-		                    if(data[j].EventImage!="")
-		                    {
-		                    	 var rowImg= $("<img>").attr("src", data[j].EventImage).appendTo(rowRight);
-		                    	 rowImg.css({"display":"none"})
-		                    }
+		                    var rowP = $("<p>").text(data[j].EventContent).appendTo(rowRight);
 		                }
 		                else if (year.slice(0, 4) == "2017") {
 		                    sumEvent17++;
@@ -64,13 +44,7 @@
 		                    var rowYear = $("<h2>").text(data[j].EventTime).appendTo(rowLeft);
 		                    var rowDot = $("<img>").attr("src", "images/dot.png").appendTo(rowLeft);
 		                    var rowRight = $("<div>").addClass("accomplishment-right").appendTo(row);
-		                    var rowP = $("<p>").appendTo(rowRight);
-		                    var rowSpan = $("<span>").text(data[j].EventContent).appendTo( rowP);
-		                    if(data[j].EventImage!="")
-		                    {
-		                    	 var rowImg= $("<img>").attr("src", data[j].EventImage).appendTo(rowRight);
-		                    	 rowImg.css({"display":"none"})
-		                    }
+		                    var rowP = $("<p>").text(data[j].EventContent).appendTo(rowRight);
 		                }
 
 		                
@@ -295,65 +269,6 @@
 									           
 											}
 								 		})
-								 		$(".accomplishment-right").each(function(){
-								 			if($(this).find("img").length>0 )
-								 			{
-								 				var this_=$(this);
-								 				$(this).find("span").css({"cursor":"pointer"})
-								 				$(this).find("span").hover(function(){$(this).css({"color":"#e94e1b"});
-								 					 this_.prev().find("h2").css({"color":"#e94e1b"})
-								 					},function(){$(this).css({"color":"black"});
-								 					this_.prev().find("h2").css({"color":"black"})
-								 				})
-								 				
-								 			}
-								 		})
-								 		$(".accomplishment-right p").find("span").on("click",function(){
-											var this_=$(this)
-								 			if($(this).parent("p").parent(".accomplishment-right").find("img").length>0 )
-								 			{
-									 			$("body").after($("<div class='open'><p class='bottomText'></p></div>"),"<div class='mask'></div>")
-									 			 $(this).parent("p").parent(".accomplishment-right").find("img").appendTo(".open").css({
-									 			 	"display":"block",
-									 			 	"width":100+"%",
-									 			 	"height":460
-									 			 });
-													$(".mask").css(
-													{
-														'height':$(".container").css("height"),
-														'width':$(".container").css("width")
-													})
-													
-													$(".open").css(
-													{
-														'top':50+"%",
-
-													})
-													$(".bottomText").text($(this).text())
-														
-												
-													$(window).resize(function(){
-
-														$(".mask").css(
-														{
-														'height':$(".container").css("height"),
-														'width':$(".container").css("width")
-														})
-													
-														$(".open").css(
-														{
-															'top':50+"%"
-														})
-
-													});
-													$(".mask").on('click',function(){
-														$(".open").find("img").appendTo( this_.parent("p").parent(".accomplishment-right")).css({"display":"none"});
-														$(".open").remove();
-														$(".mask").remove();
-													})
-								 			}
-								 			
-											})
 								})
 							})
 						})
@@ -482,9 +397,5 @@
 					show_.css({ "top":clockBoxTop- parseInt($(".navigation-box").css("top"))+(init+1)*70})
 
 		}
-		function open(){//弹出弹出层
-	
-	}
 		})
-
 	})

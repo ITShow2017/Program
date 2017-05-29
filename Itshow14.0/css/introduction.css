@@ -53,7 +53,7 @@ legend {
     color: #000000;
     }
 body {
-    font: 14px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
+    font: 16px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
     }
 select, input, button, textarea {
     font: 99% arial,helvetica,clean,sans-serif;
@@ -179,7 +179,7 @@ ul li{
 }
 .right-enter{
     position: absolute;
-    top:80px;
+    top:100px;
     left: 480px;
 }
 .top-enter{
@@ -195,15 +195,15 @@ ul li{
 
 .number{
     position: absolute;
-    font-size: 16px;
+    font-size: 18px;
     top:48%;
     left: -100%;
     margin-top: -90px;
-     margin-left: -25px;
+     margin-left: -29px;
 }
 .number span{
     position: absolute;
-    width: 18px;
+    width: 20px;
     height: 3px;
     left: 0;
     background-color:  #e94e1b;
@@ -212,11 +212,11 @@ ul li{
 }
 .department{
     position: absolute;
-    font-size: 16px;
+    font-size: 24px;
     top:48%;
     left: -100%;
     margin-top: -60px;
-    margin-left: -70px;
+    margin-left: -100px;
 }
 .department-img{
     position: absolute;

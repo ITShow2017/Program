@@ -77,7 +77,7 @@
 			$(".mid-line").animate({"height":(H-grayCircleW)/2},1000,function(){
 				$(".HTML").addClass("onShow");
 				show();
-				leftEnter.animate({"top":80},600)
+				leftEnter.animate({"top":100},600)
 				$(".orange-cube").animate({"top":0},600,function(){
 					$(".mid-line").animate({"height":100+"%"},300,function(){
 							$(".button-right-bottom").on("click",function(){//右下方按钮的点击事件

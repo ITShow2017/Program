@@ -53,7 +53,7 @@ legend {
     color: #000000;
     }
 body {
-    font: 14px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
+    font: 16px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
     }
 select, input, button, textarea {
     font: 99% arial,helvetica,clean,sans-serif;
@@ -150,7 +150,7 @@ ul li{
 	margin-left: -50px;
 }
 .top-title h1{
-
+ font-size: 18px;
 	text-align: center;
 }
 .top-title span{
@@ -167,7 +167,7 @@ ul li{
 .top-title h2{
 	position: relative;
 	margin-top: 5px;
-	font-size: 18px;
+	font-size: 24px;
 	text-align: center;
 }
 .next-page-background{
@@ -184,7 +184,7 @@ ul li{
 	position: absolute;
 	bottom: 51px;
 	left: 50%;
-	margin-left:-30px;
+	margin-left:-28.5px;
 }
 .next-page-arrow-left{
 	width: 60px;

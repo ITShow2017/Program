@@ -48,13 +48,16 @@
                 {
                     $("body").css({"height":660});
                     $(".container").css({"height":660});
+                    $(".show-box").css({"top":40})
+                    $(".poster-main").css({"top":10})
+                    $(".hide").css({"top":-15})
 
                     H=660;
                 }
                 else if(H>660&& H <=730) {
                     $(".container").css({"height":H});
-                    $(".show-box").css({"top":45})
-                    $(".poster-main").css({"top":5})
+                    $(".show-box").css({"top":40})
+                    $(".poster-main").css({"top":10})
                     $(".hide").css({"top":-15})
                 }
                  else if(H>730&&H<=850) {
@@ -85,8 +88,8 @@
                     {
                         $("body").css({"height":660});
                         $(".container").css({"height":660});
-                        $(".show-box").css({"top":45})
-                        $(".poster-main").css({"top":5})
+                        $(".show-box").css({"top":40})
+                        $(".poster-main").css({"top":10})
                         $(".hide").css({"top":-15})
                         
                         H=660;
@@ -94,7 +97,7 @@
                     else if(H>660&& H <=730) {
                         $(".container").css({"height":H});
                         $(".show-box").css({"top":45})
-                        $(".poster-main").css({"top":5})
+                        $(".poster-main").css({"top":10})
                         $(".hide").css({"top":-15})
                         $(".mid-line").css({"height":parseInt($(".show-box").css("top"))+25})
                     }

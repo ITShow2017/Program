@@ -9,6 +9,44 @@
     <script type="text/javascript"  src="js/jquery.easing.min.js"></script>
     <script type="text/javascript"  src="js/navigation.js"></script>
      <script type="text/javascript" src="js/works.js"></script> 
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ie8.css">
+    <style> 
+    .mask{
+        display:none;
+    }
+    .cover{
+        display:none;
+    }
+    </style>
+   
+    <![endif]-->
+    <!--[if lte IE 5]>
+    <style>
+    .ie5-two-words-length
+    {
+    width:32px;
+    }
+    .ie5-three-words-length
+    {
+    width:50px;
+    }
+    .ie5-four-words-length
+    {
+    width:65px;
+    }
+    .ie5-five-words-length
+    {
+    width:80px;
+    }
+    .number span{
+    display:none;
+    }
+    .top-title span{
+        display:none;
+    }
+    </style>
+    <![endif]-->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="show-box">

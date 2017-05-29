@@ -24,7 +24,7 @@
 .line{
 	position: relative;
 	display: block;
-	margin-bottom: 3px;
+	margin-bottom: 5px;
 	height: 4px;
 	width: 30px;
 	background-color: #e94e1b;
@@ -41,7 +41,7 @@
 }
 .slide-left{
 	position: absolute;
-	width: 590px;
+	width: 650px;
 	height: 25px;
 	right:-100%;
 }
@@ -65,7 +65,8 @@
 	margin-bottom: 3px;
 	height: 2px;
 	top: -2px;
-	width: 100%;
+	margin-left: 0%;
+	width: 94%;
 	background-color: #e94e1b;
 	border-radius: 5px;
 }

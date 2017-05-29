@@ -11,13 +11,13 @@
 			if($.browser.version != "7.0")//如果不是IE7就将导航栏收起时的left值设置成列表的宽度
 			{
 				
-				timer = setTimeout(function () {
+
                     							$(".navigation-box").css({"left":parseInt($(".navigation").css("width"))})	
-               								 },5);
+
 				$(window).resize(function(){
 					timer = setTimeout(function () {
                     							$(".navigation-box").css({"left":parseInt($(".navigation").css("width"))})	
-               								 },5);
+               								 },10);
 
 					
 				});
@@ -70,7 +70,7 @@
 					});
 					
 					$(".forth-line").stop(true).animate({"right":-50},300,function(){
-						$(".third-line").stop(true).animate({"top":-3.5},1,function(){
+						$(".third-line").stop(true).animate({"top":-7.5},1,function(){
 								$('.third-line').stop(true).rotate({
 								                angle: 0,
 								                animateTo: -45,

@@ -1,0 +1,245 @@
+﻿* { padding: 0; margin: 0; border: 0; } 
+html {
+    background: none repeat scroll 0 0 #FFFFFF!important;
+    color: #000000;
+    }
+body, div, dl, dt, dd, ul, ol, li, h2, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+fieldset, img {
+    border: 0 none;
+    }
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+    }
+li {
+    list-style: none outside none;
+    }
+caption, th {
+    text-align: left;
+    }
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+    }
+
+q:before, q:after {
+    content: "";
+    }
+abbr, acronym {
+    border: 0 none;
+    font-variant: normal;
+    }
+sup {
+    vertical-align: text-top;
+    }
+sub {
+    vertical-align: text-bottom;
+    }
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    }
+input, textarea, select {
+    }
+legend {
+    color: #000000;
+    }
+body {
+    font: 16px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
+    }
+select, input, button, textarea {
+    font: 99% arial,helvetica,clean,sans-serif;
+    }
+table {
+    font-size: inherit;
+    }
+pre, code, kbd, samp, tt {
+    font-family: monospace;
+    line-height: 100%;
+    }
+a {
+    color: black;
+    text-decoration: none;
+    }
+a:hover, a:focus {
+    text-decoration: none;
+    }
+strong {
+    font-weight: bold;
+    }
+input[type="submit"] {
+    cursor: pointer;
+    }
+button {
+    cursor: pointer;
+    }
+.clearfix { *zoom:1; }
+ul li{
+    list-style-type:none:
+    }
+.clearfix:after{
+        content: ".";
+        display: block;
+        height: 0; 
+        clear: both;
+        visibility: hidden;     
+}
+.mid-line{
+	position: absolute;
+	left: 50%;
+	margin-left: -1px;
+	width: 2px;
+	background-color:#e94e1b; 
+
+}
+.poster-main{ 
+	position:relative;
+	height: 60%;
+	width:80%;
+	left: 50%;
+	top:10px;
+	margin-left: -410px;
+}
+.poster-main a,.poster-item img{
+	display:block;
+	height: 100%;
+	width: 100%;
+}
+
+.poster-item{
+	height: 100%;
+ 	position:absolute;
+ 	left:0;
+ 	top:0;
+}
+.poster-btn{
+	 position:absolute;
+	 top:0;
+	 width:20%;
+	 height:100%;
+	 z-index:10;
+	 cursor:pointer;  
+}
+.poster-prev-btn{
+	left:0; 
+}
+.poster-next-btn{
+	left: 80%;
+}
+.mask{
+	position: absolute;
+	background-color: white;
+	top: 0;
+	width: 100%;
+	height: 440px;
+}
+.top-title{
+	position:relative;
+	width:100px;
+	height: 50px;
+	top: 0px;
+	left: 50%;
+	margin-left: -50px;
+}
+.top-title h1{
+ font-size: 18px;
+	text-align: center;
+}
+.top-title span{
+	position: relative;
+	display: block;
+	height: 3px;
+	width: 20px;
+	left:50%;
+	top: 2px;
+	margin-left: -10px;
+	background-color:#e94e1b; 
+	text-align: center;
+}
+.top-title h2{
+	position: relative;
+	margin-top: 5px;
+	font-size: 24px;
+	text-align: center;
+}
+.next-page-background{
+	width: 40px;
+	height: 102px;
+	position: absolute;
+	bottom: 0px;
+	left: 50%;
+	margin-left:-20px;
+}
+.next-page-arrow-bottom{
+	cursor:pointer;
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	bottom: 51px;
+	left: 50%;
+	margin-left:-28.5px;
+}
+.next-page-arrow-left{
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	left: -121px;
+	top: 159px;
+
+}
+.next-page-arrow-right{
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	right: -121px;
+	top: 159px;
+}
+.next-btn-circle
+{
+	width: 80px;
+	position: absolute;
+	top:150px;
+	right: -130px;
+}
+.prev-btn-circle
+{
+	width: 80px;
+	position: absolute;
+	top:150px;
+	left:-130px;
+}
+.hide{
+	z-index: 100;
+	position: relative;
+	top:25px;
+	line-height: 25px;
+	text-align: center;
+	z-index: 100;
+}
+.show-box{
+	position: relative;
+}
+.cover{
+	opacity: 0.5;
+	position: absolute;
+	background-color: white;
+	top: 0;
+	width: 100%;
+	height: 440px;
+}
+@media screen and (max-width:1600px) {
+    .top-title h1{
+        font-size:16px;
+    }
+    .top-title h2 {
+        font-size:22px;
+    }
+}

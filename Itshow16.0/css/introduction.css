@@ -1,0 +1,252 @@
+* { padding: 0; margin: 0; border: 0; } 
+html {
+    background: none repeat scroll 0 0 #FFFFFF!important;
+    color: #000000;
+    }
+body, div, dl, dt, dd, ul, ol, li, h2, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+fieldset, img {
+    border: 0 none;
+    }
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+    }
+li {
+    list-style: none outside none;
+    }
+caption, th {
+    text-align: left;
+    }
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+    }
+
+q:before, q:after {
+    content: "";
+    }
+abbr, acronym {
+    border: 0 none;
+    font-variant: normal;
+    }
+sup {
+    vertical-align: text-top;
+    }
+sub {
+    vertical-align: text-bottom;
+    }
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    }
+input, textarea, select {
+    }
+legend {
+    color: #000000;
+    }
+body {
+    font: 16px/1.231 '微软雅黑',arial,helvetica,clean,sans-serif;
+    }
+select, input, button, textarea {
+    font: 99% arial,helvetica,clean,sans-serif;
+    }
+table {
+    font-size: inherit;
+    }
+pre, code, kbd, samp, tt {
+    font-family: monospace;
+    line-height: 100%;
+    }
+a {
+    color: black;
+    text-decoration: none;
+    }
+a:hover, a:focus {
+    text-decoration: none;
+    }
+strong {
+    font-weight: bold;
+    }
+input[type="submit"] {
+    cursor: pointer;
+    }
+button {
+    cursor: pointer;
+    }
+.clearfix { *zoom:1; }
+ul li{
+    list-style-type:none:
+    }
+.clearfix:after{
+        content: ".";
+        display: block;
+        height: 0; 
+        clear: both;
+        visibility: hidden;     
+}
+.container{
+    width: 100%;
+    overflow: hidden;
+}
+.mid-line{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background-color: #e94e1b;
+    width: 2px;
+    
+    margin:0 auto;
+    margin-left: -1px;
+}
+.gray-circle{
+    position: absolute;
+    left: 50%;
+    background-color: #f6f6f6;
+    width: 480px;
+    height: 480px;
+    border-radius:240px;
+    margin-left: -240px;
+    z-index: 3;
+    overflow: hidden;
+}
+.orange-cube {
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    background-color: #e94e1b;
+    top:-240px;
+    left: 50%;
+    z-index: 4;
+}
+.orange-cube-pretend{
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    background-color: #e94e1b;
+    z-index: 4;
+}
+.orange-cube-pretend-1st{
+    left: 480px;
+    top: 240px;
+}
+.orange-cube-pretend-2nd{
+   left: 0px;
+    top: 480px;
+}
+.orange-cube-pretend-3rd{
+    left: -240px;
+    top: 0px;
+    
+}
+.image-circle
+{
+    position: absolute;
+    left: 50%;
+    width: 440px;
+    height: 440px;
+    border-radius:220px;
+    margin-left: -220px;
+    background-color: white;
+    z-index: 5;
+    overflow: hidden;
+}
+.button
+{
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    width: 240px;
+    height: 240px;
+    z-index: 6;
+}
+.button-left-top,.button-left-bottom
+{
+    margin-left: -240px;
+}
+
+.left-enter{
+    position: absolute;
+    top:-240px;
+    left: 100px;
+}
+.right-enter{
+    position: absolute;
+    top:100px;
+    left: 480px;
+}
+.top-enter{
+    position: absolute;
+    left: 100px;
+    top: -200px;
+}
+.bottom-enter{
+    position: absolute;
+    left: 120px;
+    top: 480px;
+}
+
+.number{
+    position: absolute;
+    font-size: 18px;
+    top:48%;
+    left: -100%;
+    margin-top: -90px;
+     margin-left: -29px;
+}
+.number span{
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    left: 0;
+    background-color:  #e94e1b;
+    top: 20px;
+    border-radius: 2px;
+}
+.department{
+    position: absolute;
+    font-size: 24px;
+    top:48%;
+    left: -100%;
+    margin-top: -60px;
+    margin-left: -100px;
+}
+.department-img{
+    position: absolute;
+    top:48%;
+    left: -100%;
+    margin-left: -240px;
+    margin-top: -14.5px;
+}
+.ui_{
+    margin-left:-170px; 
+}
+.functional span{
+    color: #e94e1b;
+}
+.characterize{
+    position: absolute;
+    top: 33%;
+    width: 250px;
+    left: 100%;
+    line-height: 25px;
+    margin-left: 22.5%;
+
+}
+.characterize p{
+    margin-bottom: 30px;
+
+}
+.characterize span{
+    color: #e94e1b;
+}
+
+
+

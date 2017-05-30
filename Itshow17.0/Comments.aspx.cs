@@ -82,16 +82,22 @@ public partial class Comments : System.Web.UI.Page
 
                             message.MessageContent = comment;
 
-                            message.MessageTime = Convert.ToDateTime(time);
+                            if (comment == "(请不要超过140个字)")
+                            {
+                                Response.Write("<script>alert('请输入留言内容！');location='Comments.aspx'</script>");
+                            }
+                            else
+                            {
+                                message.MessageTime = Convert.ToDateTime(time);
 
-                            message.MessagePhoto = photoUrl;
+                                message.MessagePhoto = photoUrl;
 
-                            db.Message.Add(message);
+                                db.Message.Add(message);
 
-                            db.SaveChanges();
+                                db.SaveChanges();
 
-                            Response.Write("<script>alert('留言成功！');location='Comments.aspx'</script>");
-
+                                Response.Write("<script>alert('留言成功！');location='Comments.aspx'</script>");
+                            }
                         }
                     }
                     else

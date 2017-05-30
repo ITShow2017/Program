@@ -56,7 +56,7 @@
                             <th>姓名</th>
                             <th>所属部门</th>
                             <th>年级</th>
-                     
+                            <th>专业</th>
                             <th>爱好</th>
                             <th>简介</th>
                             <th>编辑</th>
@@ -74,6 +74,7 @@
                                     </td>
                                     <td><%# Eval("MemberDepartment") %></td>
                                     <td><%# Eval("MemberGrade") %></td>
+                                    <td><%# Eval("MemberMajor") %></td>
                                     <td><%# Eval("MemberInterest") %></td>
                                     <td><%# Eval("MemberInstruction") %></td>
                            

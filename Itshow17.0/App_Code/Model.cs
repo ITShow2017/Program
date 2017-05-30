@@ -59,6 +59,7 @@ public partial class Member
     public string MemberYear { get; set; }
     public string MemberInstruction { get; set; }
     public string MemberInterest { get; set; }
+    public string MemberMajor { get; set; }
 }
 
 public partial class Message

@@ -46,6 +46,8 @@
             <asp:ListItem>2012</asp:ListItem>
         </asp:DropDownList>
         <br />
+        专业：<br />
+        <asp:TextBox ID="txtMajor" runat="server" ></asp:TextBox><br />
         照片(点击照片可进行修改)：
         <br />
         <asp:ImageButton ID="btnImage" runat="server" OnClick="btnImage_Click" />

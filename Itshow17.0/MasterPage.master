@@ -1,0 +1,94 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+       <div class="container">
+               	<div class="container-comments">
+
+        <div class="navigation">
+			<ul class="slide-left">
+				<li class="roll-li ie5-two-words-length">
+					<span>首页
+						<br />	
+						<a href="Index.aspx">首页</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+				<li class="roll-li ie5-four-words-length">
+					<span>部门介绍
+						<br />	
+						<a href="Introdution.aspx">部门介绍</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+				<li class="roll-li ie5-four-words-length">
+					<span>作品展示
+						<br />	
+						<a href="Works.aspx">作品展示</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+				<li class="roll-li ie5-five-words-length">
+					<span>爱特大事记
+						<br />	
+						<a href="Events.aspx">爱特大事记</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+				<li class="roll-li ie5-four-words-length">
+					<span>成员展示
+						<br />	
+						<a href="MemberShow.aspx">成员展示</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+				
+				<li class="roll-li ie5-three-words-length">
+					<span>留言板
+						<br />	
+						<a href="Comments.aspx">留言板<span class="under-line"></span></a>
+						
+					</span>
+				</li>
+				<li class="roll-li ie5-four-words-length">
+					<span>加入我们
+						<br />	
+						<a href="	">加入我们</a>
+						<span class="under-line"></span>
+					</span>
+				</li>
+			</ul>
+
+		</div>
+		<div class="navigation-box">
+				<span class="line first-line"></span>
+				<span class="line second-line"></span>
+				<span class="line third-line"></span>
+				<span class="line forth-line"></span>
+			</div>
+
+
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+</div>
+
+           </div>
+    </div>
+    </form>
+</body>
+</html>

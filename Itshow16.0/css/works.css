@@ -1,4 +1,4 @@
-* { padding: 0; margin: 0; border: 0; } 
+﻿* { padding: 0; margin: 0; border: 0; } 
 html {
     background: none repeat scroll 0 0 #FFFFFF!important;
     color: #000000;
@@ -222,7 +222,6 @@ ul li{
 	top:25px;
 	line-height: 25px;
 	text-align: center;
-	display: none;
 	z-index: 100;
 }
 .show-box{

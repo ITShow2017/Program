@@ -49,15 +49,15 @@
                     $("body").css({"height":660});
                     $(".container").css({"height":660});
                     $(".show-box").css({"top":40})//屏幕高度变化调整top值
-                    $(".poster-main").css({"top":25})//屏幕高度变化调整top值
-                    $(".hide").css({"top":-8})//屏幕高度变化调整top值
+                    $(".poster-main").css({"top":22})//屏幕高度变化调整top值
+                    $(".hide").css({"top":5})//屏幕高度变化调整top值
 
                     H=660;
                 }
                else if(H>660&& H <=730) {
                         $(".container").css({"height":H});
                         $(".show-box").css({"top":45})
-                        $(".poster-main").css({"top":30})
+                        $(".poster-main").css({"top":25})
                         $(".hide").css({"top":5})
                         $(".mid-line").css({"height":parseInt($(".show-box").css("top"))+25})
                     }
@@ -101,15 +101,15 @@
                         $("body").css({"height":660});
                         $(".container").css({"height":660});
                         $(".show-box").css({"top":40})
-                        $(".poster-main").css({"top":25})
-                        $(".hide").css({"top":-8})
+                        $(".poster-main").css({"top":22})
+                        $(".hide").css({"top":5})
                         
                         H=660;
                     }
                     else if(H>660&& H <=730) {
                         $(".container").css({"height":H});
                         $(".show-box").css({"top":45})
-                        $(".poster-main").css({"top":30})
+                        $(".poster-main").css({"top":25})
                         $(".hide").css({"top":5})
                         $(".mid-line").css({"height":parseInt($(".show-box").css("top"))+25})
                     }

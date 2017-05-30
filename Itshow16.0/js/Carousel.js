@@ -77,10 +77,7 @@
 						   left = prev.css("left"),
 						   top = prev.css("top");
 							zIndexArr.push(zIndex);	
-							if(self.css("width")==_this_.setting.posterWidth+"px")
-						   {
-						   		self.children("a").find(".hide").css({"display":"none"})
-						   }
+							
 						   self.animate({
 							   					width:width,
 												height:height,
@@ -89,11 +86,7 @@
 												top:top
 												},_this_.setting.speed,function(){
 													_this_.rotateFlag = true;
-													if(self.css("width")==_this_.setting.posterWidth+"px")
-													   {
-													   	
-													   	self.children("a").find(".hide").css({"display":"block"})
-													   }
+													
 												});
 				});
 				//zIndex需要单独保存再设置，防止循环时候设置再取的时候值永远是最后一个的zindex
@@ -111,10 +104,6 @@
 						   left = next.css("left"),
 						   top = next.css("top");
 						   zIndexArr.push(zIndex);
-						   if(self.css("width")==_this_.setting.posterWidth+"px")
-						   {
-						   		self.children("a").find(".hide").css({"display":"none"})
-						   }	
 						   self.animate({
 							   					width:width,
 												height:height,
@@ -124,11 +113,7 @@
 												top:top
 												},_this_.setting.speed,function(){
 													_this_.rotateFlag = true;
-													if(self.css("width")==_this_.setting.posterWidth+"px")
-													   {
-													   	
-													   	self.children("a").find(".hide").css({"display":"block"})
-													   }
+													
 													
 												});
 						   

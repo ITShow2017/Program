@@ -223,9 +223,9 @@ $(function(){
 					$(".pop-member-in>img").attr("src",memberthisYear[i].MemberImage);
 					$(".member-detailed h1").text(memberthisYear[i].MemberName);
 					$(".member-detailed>p").text(memberthisYear[i].MemberInstruction);
-					$(".member-star p").text(memberthisYear[i].MemberConstellation);
-					$(".member-major p").text(memberthisYear[i].MemberInterest);
-					$(".member-hobby p").text(memberthisYear[i].MemberMajor);
+					$(".member-star p").text(memberthisYear[i].MemberGrade);
+					$(".member-major p").text(memberthisYear[i].MemberMajor);
+					$(".member-hobby p").text(memberthisYear[i].MemberInterest);
 		        }
 		}) 
 	})

@@ -33,7 +33,11 @@ public partial class Comments : System.Web.UI.Page
 
                 if (a == false)
                 {
-                    string comment = textarea1.Value;
+                    System.Text.RegularExpressions.Regex regex1 = new System.Text.RegularExpressions.Regex(@"<script[\s\S]+</script *>", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                    string comment0 = regex1.Replace(textarea1.Value, "");
+
+                    string comment = Server.HtmlDecode(comment0);
 
                     if (txtCode.Text == Session["CheckCode1"].ToString())
                     {

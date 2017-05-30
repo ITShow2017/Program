@@ -43,6 +43,8 @@ public partial class MemberEditor : System.Web.UI.Page
 
                             btnImage.ImageUrl = person.MemberImage;//成员照片
 
+                            txtMajor.Text = person.MemberMajor;
+
                             txtIntruduction.Text = person.MemberInstruction;
 
                             txtHobby.Text = person.MemberInterest;
@@ -57,7 +59,7 @@ public partial class MemberEditor : System.Web.UI.Page
                                 dropGrade.SelectedValue = Server.UrlDecode(Request.Cookies["arr"]["grade"]);
                                 txtIntruduction.Text = Server.UrlDecode(Request.Cookies["arr"]["instruction"]);
                                 txtHobby.Text = Server.UrlDecode(Request.Cookies["arr"]["hobby"]);
-                              
+                                txtMajor.Text = Server.UrlDecode(Request.Cookies["arr"]["major"]);
                                 HttpCookie cookies = Request.Cookies["arr"];//删除cookies
                                 cookies.Expires = System.DateTime.Now.AddDays(-1);
                                 Response.Cookies.Add(cookies);
@@ -90,7 +92,7 @@ public partial class MemberEditor : System.Web.UI.Page
         string instruction = txtIntruduction.Text;
 
         string hobby = txtHobby.Text;
-
+        string major = txtMajor.Text;
 
         if (name.Length > 0 )
         {
@@ -109,7 +111,7 @@ public partial class MemberEditor : System.Web.UI.Page
                     person.MemberYear = dropYear.SelectedValue;
                     person.MemberInstruction = instruction;
                     person.MemberInterest = hobby;
-           
+                    person.MemberMajor = major;
                     if (db.SaveChanges() == 1)
                         Response.Write("<script>alert('编辑成功');location='MemberList.aspx'</script>");
                     else
@@ -131,7 +133,7 @@ public partial class MemberEditor : System.Web.UI.Page
         cookie.Values["grade"] = Server.UrlEncode(dropGrade.SelectedValue);
         cookie.Values["instruction"] = Server.UrlEncode(txtIntruduction.Text);
         cookie.Values["hobby"] = Server.UrlEncode(txtHobby.Text);
-    
+        cookie.Values["major"] = Server.UrlEncode(txtMajor.Text);
         cookie.Expires = System.DateTime.Now.AddMinutes(3);
         Response.Cookies.Add(cookie);
 

@@ -26,9 +26,9 @@ public partial class ITShowEntities : DbContext
     public DbSet<Admin> Admin { get; set; }
     public DbSet<Application> Application { get; set; }
     public DbSet<Event> Event { get; set; }
+    public DbSet<Member> Member { get; set; }
     public DbSet<Message> Message { get; set; }
     public DbSet<Question> Question { get; set; }
     public DbSet<sysdiagrams> sysdiagrams { get; set; }
     public DbSet<Works> Works { get; set; }
-    public DbSet<Member> Member { get; set; }
 }

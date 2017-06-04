@@ -56,7 +56,9 @@ $(function(){
                 	    var commentsImg = $("<img>").attr("src", jsonObj[j].MessagePhoto).appendTo(commentsPhotoin);
                 	    var commentsTime = $("<p>").text(jsonObj[j].MessageTime.replace("T", " ")).appendTo(commentsPhoto);
                 	    var commentsComment = $("<div>").addClass("comments-comment").appendTo(everyComments);
-                	    var visitorcomments = $("<p>").text(jsonObj[j].MessageContent).addClass("visitor-comment").appendTo(commentsComment);
+                	    //var visitorcomments = $("<p>").text(jsonObj[j].MessageContent).addClass("visitor-comment").appendTo(commentsComment);
+                	    var comments=htmlDecodeJQ(jsonObj[j].MessageContent);
+                	    var visitorcomments = $("<p>").text(comments).addClass("visitor-comment").appendTo(commentsComment);
                 	    var adminReply = $("<div>").addClass("admin-reply").addClass("clearfix").appendTo(commentsComment);
                 	    if (jsonObj[j].MessageComment != null) {
                 	        var replyH = $("<h3>").text("管理员回复").appendTo(adminReply);
@@ -116,6 +118,17 @@ $(function(){
 
 	
 	var afterLength=0;
+	function htmlEncodeJQ ( str ) {  
+    	return $('<span/>').text(str).html();  
+	}
+	function htmlDecodeJQ ( str ) {  
+    return $('<span/>').html( str ).text();  
+	}
+	$("#form1").submit(function (e) {
+		var msg=$(".comment-forus-content").val();
+		msg=htmlEncodeJQ (msg);
+		$(".comment-forus-content").val(msg);
+	})
 	$(".comment-forus-content").keydown(function(){
 		var curLength=$(this).val().length;
 		console.log(curLength);
@@ -145,8 +158,6 @@ $(function(){
 		if($(this).val()=="")
 			$(this).val("请输入图片中的字符");
 	})
-
-
 	$(".photo-photos").click(function(){
 	    var thechoosen = $(".photo-photos").index(this);
 	    $("#photoIndex").val(thechoosen);
